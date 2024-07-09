@@ -18,8 +18,8 @@ public class Sound {
     float volume;
 
     public Sound() {
-        soundURL[1] = new File("C:/Users/rober/OneDrive/Programming/Workspace/Workspace/2DGame_Example/res/Sound/Theme-Song.wav");
-        soundURL[0] = new File("C:/Users/rober/OneDrive/Programming/Workspace/Workspace/2DGame_Example/res/Sound/Title-Song.wav");
+        soundURL[1] = new File("C:/Users/rober/OneDrive/Programming/AdventureGame/res/Sound/Theme-Song.wav");
+        soundURL[0] = new File("C:/Users/rober/OneDrive/Programming/AdventureGame/res/Sound/Title-Song.wav");
     }
 
     public void setFile(int i) {

@@ -50,6 +50,15 @@ public class KeyHandler implements KeyListener{
         else if (gp.gameState == gp.tradeState) {
             tradeState(code);
         }
+        else if (gp.gameState == gp.mapState) {
+            mapState(code);
+        }
+    }
+
+    public void mapState(int code) {
+        if (code == KeyEvent.VK_M) {
+            gp.gameState = gp.playState;
+        }
     }
 
     public void tradeState(int code) {
@@ -292,10 +301,16 @@ public class KeyHandler implements KeyListener{
         if (code == KeyEvent.VK_C) {
             gp.gameState = gp.characterState;
         }
+        if (code == KeyEvent.VK_M) {
+            gp.gameState = gp.mapState;
+        }
+        if (code == KeyEvent.VK_X) {
+            gp.map.miniMapOn = !gp.map.miniMapOn;
+        }
         if (code == KeyEvent.VK_R) {
             switch (gp.currentMap) {
-                case 0: gp.tileM.loadMap("C:/Users/rober/OneDrive/Programming/Workspace/Workspace/2DGame_Example/res/Maps/world1.txt", 0); break;
-                case 1: gp.tileM.loadMap("C:/Users/rober/OneDrive/Programming/Workspace/Workspace/2DGame_Example/res/Maps/indoor01.txt", 1); break;
+                case 0: gp.tileM.loadMap("C:/Users/rober/OneDrive/Programming/AdventureGame/res/Maps/world1.txt", 0); break;
+                case 1: gp.tileM.loadMap("C:/Users/rober/OneDrive/Programming/AdventureGame/res/Maps/indoor01.txt", 1); break;
                 
             }
             }

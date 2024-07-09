@@ -103,7 +103,7 @@ public class Player extends Entity {
         inventory.add(new OBJ_Key(gp));
     }
 
-    public void knockBack(Entity entity, int knockBackPower) {
+    public void setKnockBack(Entity entity, int knockBackPower) {
         entity.direction = direction;
         entity.speed += knockBackPower;
         entity.knockBack = true;
@@ -111,6 +111,8 @@ public class Player extends Entity {
 
     public int getAttack() {
         attackArea = currentWeapon.attackArea;
+        motion1Duration = currentWeapon.motion1Duration;
+        motion2Duration = currentWeapon.motion2Duration;
         return attack = strength * currentWeapon.attackValue;
     }
 
@@ -436,7 +438,7 @@ public class Player extends Entity {
         // }
         // }
     }
-
+    /*
     public void attacking() {
         spriteCounter++;
 
@@ -462,7 +464,7 @@ public class Player extends Entity {
             solidArea.height = attackArea.height;
             
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-            damageMonster(monsterIndex, attack, currentWeapon.knockBackPower);
+            damageMonster(monsterIndex, this, attack, currentWeapon.knockBackPower);
 
             int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
             damageInteractiveTile(iTileIndex);
@@ -486,7 +488,7 @@ public class Player extends Entity {
         }
 
     }
-
+    */
     public void damageProjectile(int i) {
         if (i != 999) {
             Entity projectile = gp.projectile[gp.currentMap][i];
@@ -496,7 +498,7 @@ public class Player extends Entity {
     }
 
     public void setDefaultPositions() {
-        worldX = gp.tileSize * 25;
+        worldX = gp.tileSize * 16;
         worldY = gp.tileSize * 25;
         direction = "down";
     }
@@ -526,7 +528,7 @@ public class Player extends Entity {
         }
     }
 
-    public void damageMonster(int i, int attack, int knockBackPower) {
+    public void damageMonster(int i, Entity attacker, int attack, int knockBackPower) {
         if (i != 999) {
 
             
@@ -535,7 +537,7 @@ public class Player extends Entity {
 
 
                 if (knockBackPower > 0) {
-                    knockBack(gp.monster[gp.currentMap][i], knockBackPower);
+                    setKnockBack(gp.monster[gp.currentMap][i], attacker, knockBackPower);
                 }
                 
                 int damage = attack - gp.monster[gp.currentMap][i].defense;

@@ -104,6 +104,8 @@ public class AssetSetter {
         gp.npc[mapNum][i].worldY = gp.tileSize*25;
         i++;
 
+        
+
         //Map 1
         mapNum = 1;
         i = 0;
@@ -124,6 +126,11 @@ public class AssetSetter {
 
         gp.monster[mapNum][i] = new MON_GreenSlime(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize*26;
+        gp.monster[mapNum][i].worldY = gp.tileSize*29;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Orc(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize*13;
         gp.monster[mapNum][i].worldY = gp.tileSize*29;
         i++;
         // gp.monster[2] = new MON_GreenSlime(gp);

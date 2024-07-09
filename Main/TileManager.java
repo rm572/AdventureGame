@@ -30,8 +30,8 @@ public class TileManager {
         
 
         getTileImage();
-        loadMap("C:/Users/rober/OneDrive/Programming/Workspace/Workspace/2DGame_Example/res/Maps/world1.txt", 0);
-        loadMap("C:/Users/rober/OneDrive/Programming/Workspace/Workspace/2DGame_Example/res/Maps/indoor01.txt", 1);
+        loadMap("C:/Users/rober/OneDrive/Programming/AdventureGame/res/Maps/world1.txt", 0);
+        loadMap("C:/Users/rober/OneDrive/Programming/AdventureGame/res/Maps/indoor01.txt", 1);
         // print();
     }
 
@@ -78,7 +78,7 @@ public class TileManager {
         UtilityTool uTool = new UtilityTool();
         try {
             tile[index] = new Tile();
-            tile[index].image = ImageIO.read(new File("C:/Users/rober/OneDrive/Programming/Workspace/Workspace/2DGame_Example/res/Tiles/" + imageName + ".png"));
+            tile[index].image = ImageIO.read(new File("C:/Users/rober/OneDrive/Programming/AdventureGame/res/Tiles/" + imageName + ".png"));
             tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
             tile[index].collision = collision;
         }

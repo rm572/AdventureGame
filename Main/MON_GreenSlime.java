@@ -38,78 +38,79 @@ public class MON_GreenSlime extends Entity{
     }
 
     public void setAction() {
+        
+        // int xDistance = Math.abs(worldX - gp.player.worldX);
+        // int yDistance = Math.abs(worldY - gp.player.worldY);
+        // int tileDistance = (xDistance + yDistance)/gp.tileSize;
+
         if (onPath) {
+
+            //Check if it stops checking
+            checkStopChasingOrNot(gp.player, 10, 100);
+            // if (tileDistance > 15) {
+            //     onPath = false;
+            // }
+
+
             // Goes to a certain location
             // int goalCol = 39; //39
             // int goalRow = 7; //7
 
             //Follows player
-            int goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
-            int goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
+            // int goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
+            // int goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
 
 
-            searchPath(goalCol, goalRow);
+            searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
 
-            int i = new Random().nextInt(200)+1;
-            if (i > 197 && projectile.alive == false && shotAvailableCounter == 30) {
-                projectile.set(worldX, worldY, direction, true, this);
-                // gp.projectileList.add(projectile);
-                for (int ii = 0; ii < gp.projectile[1].length; ii++) {
-                    if (gp.projectile[gp.currentMap][ii] == null) {
-                        gp.projectile[gp.currentMap][ii] = projectile;
-                        break;
-                    }
-                }
-                shotAvailableCounter = 0;
-            }
+            //Checks if it shoots projectile
+            checkShootOrNot(200, 30);
+            // int i = new Random().nextInt(200)+1;
+            // if (i > 197 && projectile.alive == false && shotAvailableCounter == 30) {
+            //     projectile.set(worldX, worldY, direction, true, this);
+            //     // gp.projectileList.add(projectile);
+            //     for (int ii = 0; ii < gp.projectile[1].length; ii++) {
+            //         if (gp.projectile[gp.currentMap][ii] == null) {
+            //             gp.projectile[gp.currentMap][ii] = projectile;
+            //             break;
+            //         }
+            //     }
+            //     shotAvailableCounter = 0;
+            // }
         }
         else {
-            actionLockCounter++;
+            //Check if it starts chasing
+            checkStartChasingOrNot(gp.player, 5, 100);
+            // if (tileDistance < 5) {
+            //     int i = new Random().nextInt(100)+1;
+            //     if (i > 50) {
+                    // onPath = true;
+            //     }
+                
+            // }
+            getRandomDirection(100);
+            // actionLockCounter++;
             
-            if (actionLockCounter == 100) {
-                Random random = new Random();
-                int i = random.nextInt(100)+1; //random num from 1-100
+            // if (actionLockCounter == 100) {
+            //     Random random = new Random();
+            //     int i = random.nextInt(100)+1; //random num from 1-100
         
-                if (i <= 25) {
-                    direction = "up";
-                }
-                else if (i <= 50) {
-                    direction = "down";
-                } 
-                else if (i <= 75) {
-                    direction = "left";
-                }
-                else {
-                    direction = "right";
-                }
-                moving = true;
-                actionLockCounter = 0;
-            }
+            //     if (i <= 25) {
+            //         direction = "up";
+            //     }
+            //     else if (i <= 50) {
+            //         direction = "down";
+            //     } 
+            //     else if (i <= 75) {
+            //         direction = "left";
+            //     }
+            //     else {
+            //         direction = "right";
+            //     }
+            //     moving = true;
+            //     actionLockCounter = 0;
+            // }
         }
-
-
-    }
-
-
-    //Slime attacks player 50% of the time when the player is within 5 tiles
-    public void update() {
-        super.update();
-
-        int xDistance = Math.abs(worldX - gp.player.worldX);
-        int yDistance = Math.abs(worldY - gp.player.worldY);
-        int tileDistance = (xDistance + yDistance)/gp.tileSize;
-
-        if (onPath == false && tileDistance < 5) {
-            int i = new Random().nextInt(100)+1;
-            if (i > 50) {
-                // onPath = true;
-            }
-            
-        }
-
-        // if (onPath && tileDistance > 15) {
-        //     onPath = false;
-        // }
     }
 
     //Follows player if hit
