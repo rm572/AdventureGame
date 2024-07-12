@@ -17,6 +17,7 @@ public class OBJ_Key extends Entity{
         description = "{" + name + "}\nIt opens a door.";
         price = 100;
         stackable = true;
+        setDialogue();
         // try {
         //     image = ImageIO.read(new File("C:/Users/rober/OneDrive/Programming/Workspace/Workspace/2DGame_Example/res/Objects/key.png"));
         //     uTool.scaleImage(image, gp.tileSize, gp.tileSize);
@@ -30,19 +31,31 @@ public class OBJ_Key extends Entity{
     }
 
     public boolean use(Entity entity) {
-    //     gp.gameState = gp.dialogueState;
+        //Open door by pressing enter -> doesn't work
+        // gp.gameState = gp.dialogueState;
 
-    //     int objIndex = getDetected(entity, gp.obj, "Door");
+        int objIndex = getDetected(entity, gp.obj, "Door");
 
-    //     if (objIndex != 999) {
-    //         gp.ui.currentDialogue = "You use the " + name + " and open the door.";
-    //         gp.obj[gp.currentMap][objIndex] = null;
-    //     }
-    //     else {
-    //         gp.ui.currentDialogue = "What are you doing?";
-    //     }
-        gp.gameState = gp.dialogueState;
-        gp.ui.currentDialogue = "What are you doing?";
-        return false;
+        if (objIndex != 999) {
+            // gp.ui.currentDialogue = "You use the " + name + " and open the door.";
+            startDialogue(this, 0);
+            gp.obj[gp.currentMap][objIndex] = null;
+            return true;
+        }
+        else {
+            // gp.ui.currentDialogue = "What are you doing?";
+            startDialogue(this, 1);
+            return false;
+        }
+
+        //Automatically opens the door -> works
+        // gp.gameState = gp.dialogueState;
+        // gp.ui.currentDialogue = "What are you doing?";
+        // return false;
+    }
+
+    public void setDialogue() {
+        dialogues[0][0] = "You use the " + name + " and open the door.";
+        dialogues[1][0] = "What are you doing?";
     }
 }

@@ -23,6 +23,7 @@ public class OBJ_Door extends Entity{
         //     e.printStackTrace();
         // }
         collision = true;
+        setDialogue();
         // solidArea.x = 0;
         // solidArea.y = 16;
         // solidArea.width = 48;
@@ -35,7 +36,8 @@ public class OBJ_Door extends Entity{
         gp.gameState = gp.dialogueState;
         for (Entity e : gp.player.inventory) {
             if (e.name.equals("Key")) {
-                gp.ui.currentDialogue = "You used a key! The door is now open";
+                // gp.ui.currentDialogue = "You used a key! The door is now open";
+                startDialogue(this, 0);
                 gp.player.inventory.remove(e);
                 removed = true;
                 break;
@@ -43,9 +45,13 @@ public class OBJ_Door extends Entity{
         }
         
         if (!removed) {
-            gp.ui.currentDialogue = "You need a key to open the door!";
+            // gp.ui.currentDialogue = "You need a key to open the door!";
+            startDialogue(this, 1);
         }
-        
+    }
 
+    public void setDialogue() {
+        dialogues[0][0] = "You used a key! The door is now open";
+        dialogues[1][0] = "You need a key to open the door!";
     }
 }

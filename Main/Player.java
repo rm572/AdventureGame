@@ -105,6 +105,7 @@ public class Player extends Entity {
         getPlayerAttackImage();
         getGuardImage();
         setItems();
+        setDialogue();
     
     }
     
@@ -664,7 +665,9 @@ public class Player extends Entity {
             }
         }
     }
-
+    public void setDialogue() {
+        dialogues[0][0] = "You are level " + level + " now!\n"+"You feel stronger";
+    }
     public void checkLevelUp() {
         if (exp >= nextLevelExp) {
             level++;
@@ -676,9 +679,8 @@ public class Player extends Entity {
             attack = getAttack();
             defense = getDefense();
 
-            gp.gameState = gp.dialogueState;
-            gp.ui.currentDialogue = "You are level " + level + " now!\n"+"You feel stronger";
-
+            gp.gameState = gp.dialogueState;      
+            startDialogue(this, 0);
         }
     }
 

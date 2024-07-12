@@ -3,7 +3,7 @@ import java.awt.Rectangle;
 public class EventHandler {
     GamePanel gp;
     EventRect eventRect[][][];
-
+    Entity eventMaster;
 
     boolean disruptedMovement = false;
     boolean teleport = false;
@@ -14,6 +14,8 @@ public class EventHandler {
 
     public EventHandler(GamePanel gp) {
         this.gp = gp;
+
+        eventMaster = new Entity(gp);
         eventRect = new EventRect[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
         int map = 0;
 
@@ -39,6 +41,15 @@ public class EventHandler {
                 }
             }
         }
+
+        setDialogue();
+    }
+
+
+    public void setDialogue() {
+        eventMaster.dialogues[0][0] = "You fall into a pit!";
+        eventMaster.dialogues[1][0] = "You drink the water.\nYour life and mana have been \nrecovered.\nYour progress has been saved";
+        // eventMaster.dialogues[2][0] = "You fall into a pit!";
     }
 
     public void checkEvent() {
@@ -98,7 +109,8 @@ public class EventHandler {
 
     public void damagePit( int gameState) {
         gp.gameState = gameState;
-        gp.ui.currentDialogue = "You fall into a pit!";
+        // gp.ui.currentDialogue = "You fall into a pit!";
+        eventMaster.startDialogue(eventMaster, 0);
         gp.player.life -= 1;
         disruptedMovement = true;
 
@@ -119,7 +131,8 @@ public class EventHandler {
         if (gp.keyH.enterPressed == true) {
             gp.gameState = gameState;
             // gp.player.attackCancel = true;
-            gp.ui.currentDialogue = "You drink the water.\nYour life and mana have been \nrecovered.\nYour progress has been saved";
+            // gp.ui.currentDialogue = "You drink the water.\nYour life and mana have been \nrecovered.\nYour progress has been saved";
+            eventMaster.startDialogue(eventMaster, 1);
             gp.player.life = gp.player.maxLife;
             gp.player.mana = gp.player.maxMana;
 
