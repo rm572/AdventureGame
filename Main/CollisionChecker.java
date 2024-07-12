@@ -36,7 +36,7 @@ public class CollisionChecker {
                         entity.downCollision = false;
                         entity.leftCollision = false;
                         entity.rightCollision = false;
-                        System.out.println("Tile Collision: up");
+                        // System.out.println("Tile Collision: up");
                     }
                 break;
             case "down":
@@ -52,7 +52,7 @@ public class CollisionChecker {
                         entity.downCollision = true;
                         entity.leftCollision = false;
                         entity.rightCollision = false;
-                        System.out.println("Tile Collision: down");
+                        // System.out.println("Tile Collision: down");
                     }
                 break;
             case "left":
@@ -69,7 +69,7 @@ public class CollisionChecker {
                         entity.downCollision = false;
                         entity.leftCollision = true;
                         entity.rightCollision = false;
-                        System.out.println("Tile Collision: left");
+                        // System.out.println("Tile Collision: left");
                     }
                 break;
             case "right":
@@ -86,7 +86,7 @@ public class CollisionChecker {
                         entity.downCollision = false;
                         entity.leftCollision = false;
                         entity.rightCollision = true;
-                        System.out.println("Tile Collision: right");
+                        // System.out.println("Tile Collision: right");
                     }
                 break;
         }

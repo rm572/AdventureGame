@@ -74,20 +74,32 @@ public class NPC_OldMan extends Entity {
     }
 
     public void setDialogue() {
-        dialogues[0] = "Hello, there.";
-        dialogues[1] = "So you've come to this \nisland to find the treausre?";
-        dialogues[2] = "I used to be a great wizard";
-        dialogues[3] = "Well, good luck on you.";
+        dialogues[0][0] = "Hello, there.";
+        dialogues[0][1] = "So you've come to this \nisland to find the treausre?";
+        dialogues[0][2] = "I used to be a great wizard";
+        dialogues[0][3] = "Well, good luck on you.";
+
+        dialogues[1][0] = "If you become tired, rest at the water";
+        dialogues[1][1] = "However, the monsters reappear if you rest.\nI don't know why but that's how it works.";
+        dialogues[1][2] = "In any case, don't push yourself too hard.";
+
+        dialogues[2][0] = "I wonder how to open that door...";
 
     }
 
     public void speak() {
-        super.speak();
+        // super.speak();
 
-        onPath = true;
-        if (onPath) {
-            moving = true;
-        }
+        //Follows player
+        // onPath = true;
+        // if (onPath) {
+        //     moving = true;
+        // }
+
+        facePlayer();
+        startDialogue(this, dialogueSet);
+
+
         
     }
 

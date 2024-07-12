@@ -63,6 +63,7 @@ public class GamePanel extends JPanel implements Runnable {
     Config config = new Config(this);
     PathFinder pFinder = new PathFinder(this);
     Map map = new Map(this);
+    SaveLoad saveLoad = new SaveLoad(this);
 
 
     Player player = new Player(this, keyH);
@@ -126,7 +127,26 @@ public class GamePanel extends JPanel implements Runnable {
         gameThread.start();
     }
 
+    public void resetGame(boolean restart) {
+        
+        player.setDefaultPositions();
+        player.restoreStatus();
+        player.resetCounter();
+        aSetter.setNPC();
+        aSetter.setMonster();
+
+        if (restart) {
+            player.setDefaultValues();
+            // player.setItems();
+            aSetter.setObject();
+            aSetter.setInteractiveTile();
+            eManager.lighting.resetDay();
+        }
+
+    }
+    /*
     public void retry() {
+
         player.setDefaultPositions();
         player.restoreLifeandMana();
         aSetter.setNPC();
@@ -142,7 +162,7 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setNPC();
         aSetter.setMonster();
         aSetter.setInteractiveTile();
-    }
+    }*/
 
     /*// @Override
     // public void run() {
@@ -316,8 +336,10 @@ public class GamePanel extends JPanel implements Runnable {
                     iTile[currentMap][i].update();
                 }
             }
-
-            eManager.update();
+            if (currentMap == 0) {
+                eManager.update();
+            }
+            // eManager.update();
         }
         if (gameState == pauseState) {
             //nothing

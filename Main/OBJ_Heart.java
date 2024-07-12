@@ -22,7 +22,11 @@ public class OBJ_Heart extends Entity{
 
     public boolean use(Entity entity) {
         gp.ui.addMessage("Life +" + value);
+        
         entity.life += value;
+        if (entity.life > entity.maxLife) {
+            entity.life = entity.maxLife;
+        }
         return true;
     }
 }

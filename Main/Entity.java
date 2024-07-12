@@ -16,10 +16,11 @@ public class Entity {
 
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1,
-        attackLeft2, attackRight1, attackRight2;
+        attackLeft2, attackRight1, attackRight2, 
+        guardUp, guardDown, guardLeft, guardRight;
     public String direction = "down";
 
-    public int spriteCounter = 0;
+
     public int spriteNum = 1;
 
     public Rectangle solidArea = new Rectangle(1, 1, 46, 46);
@@ -35,22 +36,30 @@ public class Entity {
 
 
     GamePanel gp;
-    int pixelCounter = 0;
-    int actionLockCounter = 0;
     boolean moving = false;
     boolean ready = true;
-    String dialogues[] = new String[20];
+    String dialogues[][] = new String[20][20];
     int dialogueIndex = 0;
     boolean entityCollision = false;
     boolean attacking = false;
+    boolean guarding = false;
+    boolean offBalance = false;
 
     boolean alive = true;
     boolean dying = false;
     boolean hpBarOn = false;
 
+
+    int spriteCounter = 0;
     int hpBarCounter = 0;
-    public int shotAvailableCounter = 0;
+    int shotAvailableCounter = 0;
     int dyingCounter = 0;
+    int guardCounter = 0;
+    int offBalanceCounter = 0;
+    int pixelCounter = 0;
+    int actionLockCounter = 0;
+    int invincibleCounter = 0;
+    int knockBackCounter = 0;
 
     public BufferedImage image, image2, image3;
     public String name;
@@ -61,7 +70,7 @@ public class Entity {
     int knockBackPower = 0;
 
     public boolean invincible = false;
-    int invincibleCounter = 0;
+
 
     Entity attacker;
     String knockBackDirection;
@@ -94,14 +103,25 @@ public class Entity {
     int price;
     public boolean onPath = false;
     boolean knockBack = false;
-    int knockBackCounter = 0;
+
     boolean removed = false;
     boolean highlight = false;
     Entity currentLight;
     int lightRadius;
+    boolean transparent = false;
+
+    Entity loot;
+    boolean opened = false;
 
     boolean stackable = false;
     int amount = 1;
+
+    int weaponSlotCol;
+    int weaponSlotRow;
+    int shieldSlotCol;
+    int shieldSlotRow;
+
+    int dialogueSet = 0;
 
     int type; //0 - player, 1 - NPC, 2 - monster
     public final int typePlayer = 0;
@@ -123,6 +143,20 @@ public class Entity {
     public void damageReaction() {}
     public boolean use(Entity entity) {return false;}
     public void checkDrop() {}
+    public void setLoot(Entity loot) {}
+
+    public void resetCounter() {
+        spriteCounter = 0;
+        hpBarCounter = 0;
+        shotAvailableCounter = 0;
+        dyingCounter = 0;
+        guardCounter = 0;
+        offBalanceCounter = 0;
+        pixelCounter = 0;
+        actionLockCounter = 0;
+        invincibleCounter = 0;
+        knockBackCounter = 0;
+    }
     
     public int getXDistance(Entity target) {
         int xDistance = Math.abs(worldX - target.worldX);
@@ -285,27 +319,29 @@ public class Entity {
 
     public void speak() {
 
-        if (dialogues[dialogueIndex] == null) {
-            dialogueIndex = 0;
-        }
-        gp.ui.currentDialogue = dialogues[dialogueIndex];
-        dialogueIndex++;
+        // if (dialogues[dialogueIndex] == null) {
+        //     dialogueIndex = 0;
+        // }
+        // gp.ui.currentDialogue = dialogues[dialogueIndex];
+        // dialogueIndex++;
 
-        switch (gp.player.direction) {
-            case "up":
-                direction = "down";
-                break;
-            case "down":
-                direction = "up";
-                break;
-            case "left":
-                direction = "right";
-                break;
-            case "right":
-                direction = "left";
-                break;
-        }
+
         
+    }
+
+    public void startDialogue(Entity entity, int setNum) {
+        gp.gameState = gp.dialogueState;
+        gp.ui.npc = entity;
+        dialogueSet = setNum;
+    }
+
+    public void facePlayer() {
+        switch (gp.player.direction) {
+            case "up": direction = "down"; break;
+            case "down": direction = "up"; break;
+            case "left": direction = "right"; break;
+            case "right": direction = "left"; break;
+        }
     }
 
 
@@ -386,7 +422,7 @@ public class Entity {
                                 // }
                             }
                             else {
-                                System.out.println("Up collision");
+                                // System.out.println("Up collision");
                             }
                             break;
                         case "down":
@@ -400,7 +436,7 @@ public class Entity {
                                 // }
                             }
                             else {
-                                System.out.println("Down collision");
+                                // System.out.println("Down collision");
                             }
                             break;
                         case "left":
@@ -414,7 +450,7 @@ public class Entity {
                                 // }
                             }
                             else {
-                                System.out.println("left collision");
+                                // System.out.println("left collision");
                             }
                             break;
                         case "right":
@@ -428,7 +464,7 @@ public class Entity {
                                 // }
                             }
                             else {
-                                System.out.println("Right collision");
+                                // System.out.println("Right collision");
                             }
                             break;
                     }
@@ -494,6 +530,13 @@ public class Entity {
             }
             if (shotAvailableCounter < 30) {
                 shotAvailableCounter++;
+            }
+            if (offBalance) {
+                offBalanceCounter++;
+                if (offBalanceCounter >= 60) {
+                    offBalance = false;
+                    offBalanceCounter = 0;
+                }
             }
         // }
 
@@ -595,7 +638,7 @@ public class Entity {
 
         switch(direction) {
             case "up":
-                if (gp.player.worldY < worldY && yDistance < straight && xDistance < horizontal) {
+                if (gp.player.worldY < worldY && yDistance < straight && xDistance <= horizontal) {
                     targetInRange = true;
                 }
                 break;
@@ -605,17 +648,18 @@ public class Entity {
                 }
                 break;
             case "left":
-                if (gp.player.worldX < worldX && yDistance < straight && xDistance < horizontal) {
+                if (gp.player.worldX < worldX && yDistance < straight && xDistance <= horizontal) {
                     targetInRange = true;
                 }
                 break;
             case "right":
-                if (gp.player.worldX > worldX && yDistance < straight && xDistance < horizontal) {
+                if (gp.player.worldX > worldX && yDistance < straight && xDistance <= horizontal) {
                     targetInRange = true;
                 }
                 break;
         }
 
+        // System.out.println("inrange?" + targetInRange);
         if (targetInRange) {
             int i = new Random().nextInt(rate);
             if (i == 0) {
@@ -623,16 +667,53 @@ public class Entity {
                 spriteNum = 1;
                 spriteCounter = 0;
                 shotAvailableCounter = 0;
+                // System.out.println("The monster is attacking");
             }
         }
+    }
+
+    public String getOppositeDirection(String direction) {
+        String opposite = "";
+        switch (direction) {
+            case "up": opposite = "down"; break;
+            case "down": opposite = "up"; break;
+            case "left": opposite = "right"; break;
+            case "right": opposite = "left"; break;
+        }
+
+        return opposite;
     }
 
     public void damagePlayer(int attack) {
         if (gp.player.invincible == false) {
             int damage = attack - gp.player.defense;
-            if (damage < 0) {
-                damage = 0;
+
+            String canGuardDirection = getOppositeDirection(direction);
+
+            if (gp.player.guarding && gp.player.direction.equals(canGuardDirection)) {
+                if (gp.player.guardCounter < 10) {
+                    damage = 0;
+                    setKnockBack(this, gp.player, knockBackPower);
+                    offBalance = true;
+                    spriteCounter -= 60;
+                }
+                else {
+                    damage /= 3;
+                }
+                
+                
             }
+            else {
+                if (damage < 1) {
+                    damage = 1;
+                }
+            }
+
+            if (damage != 0) {
+                gp.player.transparent = true;
+                setKnockBack(gp.player, this, knockBackPower);
+            }
+
             gp.player.life -= damage;
             gp.player.invincible = true;
         }
@@ -814,12 +895,12 @@ public class Entity {
             int enBottomY = worldY + solidArea.y + solidArea.height;
 
             if (enTopY > nextY && enLeftX >= nextX && enRightX <= nextX + gp.tileSize) {
-                System.out.println("1");
+                // System.out.println("1");
                 direction = "up";
             }
             
             else if (enTopY < nextY && enLeftX >= nextX && enRightX <= nextX + gp.tileSize) {
-                System.out.println("2");
+                // System.out.println("2");
                 direction = "down";
             }
             
@@ -827,47 +908,47 @@ public class Entity {
 
                 if (enLeftX > nextX) {
                     direction = "left";
-                    System.out.println("Moving: " + moving);
-                    System.out.println("3.1");
+                    // System.out.println("Moving: " + moving);
+                    // System.out.println("3.1");
                 }
                 if (enLeftX < nextX) {
-                    System.out.println("3.2");
+                    // System.out.println("3.2");
                     direction = "right";
                 }
             }
             else if (enTopY > nextY && enLeftX > nextX) {
-                System.out.println("4");
+                // System.out.println("4");
                 direction = "left";
                 checkCollision();
                 if (leftCollision == true) {
-                    System.out.println("4.1");
+                    // System.out.println("4.1");
                     direction = "up";
                 }
             }
             else if (enTopY > nextY && enLeftX < nextX) {
-                System.out.println("5");
+                // System.out.println("5");
                 direction = "up";
                 checkCollision();
                 if (upCollision) {
-                    System.out.println("5.1");
+                    // System.out.println("5.1");
                     direction = "right";
                 }
             }
             else if (enTopY < nextY && enLeftX > nextX) {
                 direction = "down";
-                System.out.println("6");
+                // System.out.println("6");
                 checkCollision();
                 if (downCollision) {
-                    System.out.println("6.1");
+                    // System.out.println("6.1");
                     direction = "left";
                 }
             }
             else if (enTopY < nextY && enLeftX < nextX) {
-                System.out.println("7");
+                // System.out.println("7");
                 direction = "down";
                 checkCollision();
                 if (downCollision) {
-                    System.out.println("7.1");
+                    // System.out.println("7.1");
                     direction = "right";
                 }
             }

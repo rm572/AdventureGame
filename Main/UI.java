@@ -275,6 +275,8 @@ public class UI {
                 }
                 else {
                     if (gp.player.canObtainItem(npc.inventory.get(itemIndex))) {
+                        System.out.println("The item is:" + npc.inventory.get(itemIndex).name);
+                        System.out.println("At index: " + itemIndex);
                         gp.player.coin -= price;
                     }
                     else {
@@ -464,6 +466,7 @@ public class UI {
             if (gp.keyH.enterPressed) {
                 substate = 0;
                 gp.gameState = gp.titleState;
+                gp.resetGame(true);
             }
         }
         //No
@@ -1007,6 +1010,7 @@ public class UI {
         for (int i = 0; i < entity.inventory.size(); i++) {
             Entity e = entity.inventory.get(i);
 
+
             // if (weaponNotSelected && (e == entity.currentWeapon)) {
             //     g2.setColor(Color.CYAN);
             //     g2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
@@ -1024,7 +1028,8 @@ public class UI {
                 
             // }
 
-            if (e == entity.currentShield || e == entity.currentWeapon || e == entity.currentLight) {
+            if (e != null && (e == entity.currentShield || e == entity.currentWeapon || e == entity.currentLight)) {
+
                 g2.setColor(Color.CYAN);
                 g2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
                 // shieldNotSelected = false;

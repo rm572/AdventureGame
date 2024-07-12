@@ -64,7 +64,8 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 16 * gp.tileSize;
         i++;
 
-        gp.obj[mapNum][i] = new OBJ_Chest(gp, new OBJ_Heart(gp));
+        gp.obj[mapNum][i] = new OBJ_Chest(gp);
+        gp.obj[mapNum][i].setLoot(new OBJ_Heart(gp));
         gp.obj[mapNum][i].worldX = 13 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 14 * gp.tileSize;
         i++;
@@ -127,6 +128,16 @@ public class AssetSetter {
         gp.monster[mapNum][i] = new MON_GreenSlime(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize*26;
         gp.monster[mapNum][i].worldY = gp.tileSize*29;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_GreenSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize*26;
+        gp.monster[mapNum][i].worldY = gp.tileSize*28;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_GreenSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize*25;
+        gp.monster[mapNum][i].worldY = gp.tileSize*28;
         i++;
 
         gp.monster[mapNum][i] = new MON_Orc(gp);

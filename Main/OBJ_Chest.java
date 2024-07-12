@@ -5,12 +5,10 @@ import javax.imageio.ImageIO;
 
 public class OBJ_Chest extends Entity{
     GamePanel gp;
-    Entity loot;
-    boolean opened = false;
+
     
-    public OBJ_Chest(GamePanel gp, Entity loot) {
+    public OBJ_Chest(GamePanel gp) {
         super(gp);
-        this.loot = loot;
         this.gp = gp;
         type = typeObstacle;
 
@@ -34,6 +32,10 @@ public class OBJ_Chest extends Entity{
         // catch (IOException e) {
         //     e.printStackTrace();
         // }
+    }
+
+    public void setLoot(Entity loot) {
+        this.loot = loot;
     }
 
     public void interact() {

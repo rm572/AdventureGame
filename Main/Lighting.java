@@ -116,6 +116,11 @@ public class Lighting {
         
     }
 
+    public void resetDay() {
+        dayState = day;
+        filterAlpha = 0f;
+    }
+
     public void draw(Graphics2D g2) {
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, filterAlpha));
         g2.drawImage(darknessFilter, 0, 0, null);
@@ -123,17 +128,17 @@ public class Lighting {
 
 
         //Debug
-        String situation = "";
-        switch (dayState) {
-            case day: situation = "day"; break;
-            case dusk: situation = "dusk"; break;
-            case night: situation = "night"; break;
-            case dawn: situation = "dawn"; break;
-        }
+        // String situation = "";
+        // switch (dayState) {
+        //     case day: situation = "day"; break;
+        //     case dusk: situation = "dusk"; break;
+        //     case night: situation = "night"; break;
+        //     case dawn: situation = "dawn"; break;
+        // }
 
-        g2.setColor(Color.white);
-        g2.setFont(g2.getFont().deriveFont(50f));
-        g2.drawString(situation, 800, 500);
+        // // g2.setColor(Color.white);
+        // // g2.setFont(g2.getFont().deriveFont(50f));
+        // // g2.drawString(situation, 800, 500);
     }
 
     public void update() {

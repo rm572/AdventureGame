@@ -2,7 +2,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener{
-    public boolean upPressed, downPressed, leftPressed, rightPressed, shiftPressed, enterPressed, shotKeyPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, shiftPressed, enterPressed, shotKeyPressed,
+    spacePressed;
 
     boolean showDebugText = false;
 
@@ -120,11 +121,11 @@ public class KeyHandler implements KeyListener{
         if (code == KeyEvent.VK_ENTER) {
             if (gp.ui.commandNum == 0) {
                 gp.gameState = gp.playState;
-                gp.retry();
+                gp.resetGame(false);
             }
             else if (gp.ui.commandNum == 1) {
                 gp.gameState = gp.titleState;
-                gp.restart();
+                gp.resetGame(true);
             }
         }
 
@@ -211,7 +212,10 @@ public class KeyHandler implements KeyListener{
     
                     //load game
                     else if (gp.ui.commandNum == 1) {
-                        
+                        gp.saveLoad.load();
+                        gp.gameState = gp.playState;
+                        // gp.stopMusic();
+                        // gp.playMusic(1);
                     }
     
                     //quit
@@ -307,6 +311,12 @@ public class KeyHandler implements KeyListener{
         if (code == KeyEvent.VK_X) {
             gp.map.miniMapOn = !gp.map.miniMapOn;
         }
+        if (code == KeyEvent.VK_SPACE) {
+            spacePressed = true;
+        }
+        if (code == KeyEvent.VK_Q) {
+            gp.saveLoad.save();
+        }
         if (code == KeyEvent.VK_R) {
             switch (gp.currentMap) {
                 case 0: gp.tileM.loadMap("C:/Users/rober/OneDrive/Programming/AdventureGame/res/Maps/world1.txt", 0); break;
@@ -327,7 +337,8 @@ public class KeyHandler implements KeyListener{
     }
     public void dialogueState(int code) {
         if (code == KeyEvent.VK_ENTER) {
-            gp.gameState = gp.playState;
+            // gp.gameState = gp.playState;
+            enterPressed = true;
         }
     }
     public void characterState(int code) {
@@ -422,6 +433,12 @@ public class KeyHandler implements KeyListener{
         }
         if (code == KeyEvent.VK_F) {
             shotKeyPressed = false;
+        }
+        if (code == KeyEvent.VK_SPACE) {
+            spacePressed = false;
+        }
+        if (code == KeyEvent.VK_ENTER) {
+            enterPressed = false;
         }
     }
     
