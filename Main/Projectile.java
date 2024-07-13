@@ -36,7 +36,7 @@ public class Projectile extends Entity {
 
 
 
-        switchCases(direction, speed, true);
+        switchCases(this, direction, speed, true);
         life--;
         if (life <= 0) {
             alive = false;

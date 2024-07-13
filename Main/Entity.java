@@ -231,11 +231,25 @@ public class Entity {
     }
 
     public void setKnockBack(Entity target, Entity attacker, int knockBackPower) {
-        this.attacker = attacker;
-        target.knockBackDirection = attacker.direction;
-        target.speed += knockBackPower;
-        target.knockBack = true;
+        if (target.type == typePlayer && target.moving == true) {
+
+        }
+        else {
+            this.attacker = attacker;
+            target.knockBackDirection = attacker.direction;
+            target.speed += knockBackPower;
+            // switchCases(direction, gp.tileSize, false);
+            target.knockBack = true;
+        }
+
     }
+
+    // public void knock(Entity target, Entity attacker, int knockBackPower) {
+    //     this.attacker = attacker;
+    //     target.knockBackDirection = attacker.direction;
+    //     switchCases(target, direction, knockBackPower, true);
+    //     target.knockBack = true;
+    // }
 
     public Color getParticleColor() {
         Color color = null;
@@ -361,19 +375,40 @@ public class Entity {
     public void update() {
 
         if (knockBack) {
+            // if (!(this == gp.player && gp.player.moving = true)) {
+            //     checkCollision();
+
+            //     System.out.println("Knockback");
+            //     if (collisionOn) {
+            //         knockBackCounter = 0;
+            //         knockBack = false;
+            //         speed = defaultSpeed;
+            //     }
+            //     else if (!collisionOn) {
+            //         switchCases(this, knockBackDirection, gp.tileSize/10, true);
+    
+            //     }
+            //     knockBackCounter++;
+            //     if (knockBackCounter == 10) {
+            //         knockBackCounter = 0;
+            //         knockBack = false;
+            //         speed = defaultSpeed;
+            //     }
+            // }
             checkCollision();
 
+            System.out.println("Knockback");
             if (collisionOn) {
                 knockBackCounter = 0;
                 knockBack = false;
                 speed = defaultSpeed;
             }
             else if (!collisionOn) {
-                switchCases(knockBackDirection, speed, true);
+                switchCases(this, knockBackDirection, gp.tileSize/16, true);
 
             }
             knockBackCounter++;
-            if (knockBackCounter == 10) {
+            if (knockBackCounter == gp.tileSize/3) {
                 knockBackCounter = 0;
                 knockBack = false;
                 speed = defaultSpeed;
@@ -694,6 +729,7 @@ public class Entity {
                 if (gp.player.guardCounter < 10) {
                     damage = 0;
                     setKnockBack(this, gp.player, knockBackPower);
+                    // knock(this, gp.player, knockBackPower);
                     offBalance = true;
                     spriteCounter -= 60;
                 }
@@ -711,7 +747,11 @@ public class Entity {
 
             if (damage != 0) {
                 gp.player.transparent = true;
-                setKnockBack(gp.player, this, knockBackPower);
+                if (gp.player.moving == false) {
+                    setKnockBack(gp.player, this, knockBackPower);
+                }
+                
+                // knock(gp.player, this, knockBackPower);
             }
 
             gp.player.life -= damage;
@@ -856,23 +896,23 @@ public class Entity {
 
     }
 
-    public void switchCases(String direction, int changeVal, boolean positiveChange) {
+    public void switchCases(Entity entity, String direction, int changeVal, boolean positiveChange) {
         if (!positiveChange) {
             changeVal *= (-1);
         }
 
         switch (direction) {
             case "up": 
-                worldY -= changeVal;
+                entity.worldY -= changeVal;
                 break;
             case "down":
-                worldY += changeVal;
+                entity.worldY += changeVal;
                 break;
             case "left":
-                worldX -= changeVal;
+                entity.worldX -= changeVal;
                 break;
             case "right":
-                worldX += changeVal;
+                entity.worldX += changeVal;
                 break;
         } 
     }

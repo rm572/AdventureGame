@@ -7,11 +7,13 @@ public class OBJ_Key extends Entity{
 
     GamePanel gp;
     
+    static final String objName = "Key";
     public OBJ_Key(GamePanel gp) {
         super(gp);
 
+
         this.gp = gp;
-        name = "Key";
+        name = objName;
         type = typeConsumable;
         down1 = setUp("Objects/key", gp.tileSize, gp.tileSize);
         description = "{" + name + "}\nIt opens a door.";

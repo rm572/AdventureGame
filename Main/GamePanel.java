@@ -76,6 +76,7 @@ public class GamePanel extends JPanel implements Runnable {
     Entity[][] projectile = new Entity[maxMap][20];
     ArrayList<Entity> particleList = new ArrayList<>();
     EnvironmentManager eManager = new EnvironmentManager(this);
+    EntityGenerator eGenerator = new EntityGenerator(this);
     
 
     public int gameState;

@@ -1,11 +1,11 @@
 public class OBJ_Tent extends Entity {
     GamePanel gp;
-
+    static final String objName = "Tent";
     public OBJ_Tent(GamePanel gp) {
         super(gp);
         this.gp = gp;
         type = typeConsumable;
-        name = "Tent";
+        name = objName;
         down1 = setUp("Objects/tent", gp.tileSize, gp.tileSize);
         description = "{Tent}\nYou can sleep until\nnext morning";
         price = 300;

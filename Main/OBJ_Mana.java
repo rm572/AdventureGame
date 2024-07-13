@@ -1,12 +1,13 @@
 public class OBJ_Mana extends Entity{
 
     GamePanel gp;
+    static final String objName = "Mana";
     public OBJ_Mana(GamePanel gp) {
         
         super(gp);
 
         this.gp = gp;
-        name = "Mana";
+        name = objName;
 
         type = typePickupOnly;
         value = 1;

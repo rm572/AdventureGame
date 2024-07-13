@@ -4,13 +4,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class OBJ_Heart extends Entity{
-        GamePanel gp;
+    GamePanel gp;
+    static final String objName = "Heart";
 
     public OBJ_Heart(GamePanel gp) {
         
         super(gp);
         this.gp = gp;
-        name = "Heart";
+        name = objName;
 
         image = setUp("Objects/heart_full", gp.tileSize, gp.tileSize);
         image2 = setUp("Objects/heart_half", gp.tileSize, gp.tileSize);

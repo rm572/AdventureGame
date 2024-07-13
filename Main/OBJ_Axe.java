@@ -1,9 +1,11 @@
 public class OBJ_Axe extends Entity {
 
+    static final String objName = "Woodcutter's Axe";
+
     public OBJ_Axe(GamePanel gp) {
         super(gp);
         type = typeAxe;
-        name = "Woodcutter's Axe";
+        name = objName;
         down1 = setUp("Objects/axe", gp.tileSize, gp.tileSize);
         attackValue = 2;
         attackArea.width = 30;

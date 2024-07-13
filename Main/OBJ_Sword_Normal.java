@@ -1,10 +1,10 @@
 public class OBJ_Sword_Normal extends Entity{
-
+    static final String objName = "Normal sword";
     public OBJ_Sword_Normal(GamePanel gp) {
         super(gp);
         
         type = typeSword;
-        name = "Normal sword";
+        name = objName;
         down1 = setUp("Objects/new_sword_normal", gp.tileSize, gp.tileSize);
 
         attackValue = 1;

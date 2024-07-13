@@ -2,12 +2,13 @@ import java.awt.Color;
 
 public class OBJ_Rock extends Projectile {
     GamePanel gp;
+    static final String objName = "Rock";
 
     public OBJ_Rock(GamePanel gp) {
         super(gp);
         this.gp = gp;
 
-        name = "Rock";
+        name = objName;
         speed = 2;
         maxLife = 80;
         life = maxLife;

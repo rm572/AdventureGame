@@ -124,6 +124,16 @@ public class Player extends Entity {
         entity.knockBack = true;
     }
 
+    public boolean checkFitsTileX() {
+        int x = (worldX + solidArea.x) % gp.tileSize;
+        return (x == 1 || x == 17 || x == 33);
+    }
+
+    public boolean checkFitsTileY() {
+        int x = (worldY + solidArea.y) % gp.tileSize;
+        return (x == 1 || x == 17 || x == 33);
+    }
+
     public int getAttack() {
         attackArea = currentWeapon.attackArea;
         motion1Duration = currentWeapon.motion1Duration;
@@ -272,7 +282,7 @@ public class Player extends Entity {
     
                 }
                 knockBackCounter++;
-                if (knockBackCounter == 10) {
+                if (knockBackCounter == 12) {
                     knockBackCounter = 0;
                     knockBack = false;
                     speed = defaultSpeed;
@@ -430,14 +440,26 @@ public class Player extends Entity {
             mana = maxMana;
         }
 
-        if (life <= 0) {
-            gp.ui.commandNum = -1;
-            gp.gameState = gp.gameOverState;
-        }
+        // if (life <= 0) {
+        //     gp.ui.commandNum = -1;
+        //     gp.gameState = gp.gameOverState;
+        // }
 
 
 
         keyH.enterPressed = false;
+
+        if (!checkFitsTileX()) {
+            System.out.println("X? " + checkFitsTileX());
+        }
+
+        if (!checkFitsTileY()) {
+            System.out.println("Y? " + checkFitsTileY());
+        }
+        
+        
+        
+        // System.out.println("Displacement: " + displacement);
         // attackCancel = true;
         
 
@@ -639,6 +661,7 @@ public class Player extends Entity {
 
                 if (gp.monster[gp.currentMap][i].life <= 0) {
                     gp.monster[gp.currentMap][i].dying = true;
+                    gp.monster[gp.currentMap][i].knockBackPower = 0;
                     gp.ui.addMessage("Killed the " + gp.monster[gp.currentMap][i].name + "!");
                     gp.ui.addMessage("Exp " + gp.monster[gp.currentMap][i].exp + "!");
                     exp += gp.monster[gp.currentMap][i].exp;
@@ -679,7 +702,8 @@ public class Player extends Entity {
             attack = getAttack();
             defense = getDefense();
 
-            gp.gameState = gp.dialogueState;      
+            // gp.gameState = gp.dialogueState; 
+            setDialogue();    
             startDialogue(this, 0);
         }
     }
@@ -754,26 +778,28 @@ public class Player extends Entity {
 
         boolean canObtain = false;
 
+        Entity newItem = gp.eGenerator.getObject(item.name);
+
         if (item.name.equals("Heart")) {
             item.use(this);
         }
 
-        if (item.stackable) {
-            int index = searchItemInInventory(item.name);
+        if (newItem.stackable) {
+            int index = searchItemInInventory(newItem.name);
             if (index != 999) {
                 inventory.get(index).amount++;
                 canObtain = true;
             }
             else {
                 if (inventory.size() != maxInventorySize) {
-                    inventory.add(item);
+                    inventory.add(newItem);
                     canObtain = true;
                 }
             }
         }
         else {
             if (inventory.size() != maxInventorySize) {
-                inventory.add(item);
+                inventory.add(newItem);
                 canObtain = true;
             }
         }

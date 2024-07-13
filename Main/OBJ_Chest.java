@@ -6,6 +6,8 @@ import javax.imageio.ImageIO;
 public class OBJ_Chest extends Entity{
     GamePanel gp;
 
+    static final String objName = "Chest";
+
     
     public OBJ_Chest(GamePanel gp) {
         super(gp);
@@ -13,7 +15,7 @@ public class OBJ_Chest extends Entity{
         type = typeObstacle;
 
 
-        name = "Chest";
+        name = objName;
         image = setUp("Objects/chest", gp.tileSize, gp.tileSize);
         image2 = setUp("Objects/chest_opened", gp.tileSize, gp.tileSize);
         down1 = image;

@@ -5,11 +5,12 @@ import javax.imageio.ImageIO;
 
 public class OBJ_Boots extends Entity{
     // GamePanel gp;
+    static final String objName = "Boots";
     
     public OBJ_Boots(GamePanel gp) {
         // this.gp = gp;
         super(gp);
-        name = "Boots";
+        name = objName;
         down1 = setUp("Objects/boots", gp.tileSize, gp.tileSize);
         // try {
         //     image = ImageIO.read(new File("C:/Users/rober/OneDrive/Programming/Workspace/Workspace/2DGame_Example/res/Objects/boots.png"));

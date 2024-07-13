@@ -34,6 +34,8 @@ public class UI {
     public int npcSlotRow = 0;
     int counter = 0;
     Entity npc;
+    int charIndex = 0;
+    String combinedText = "";
 
     int substate = 0;
 
@@ -841,8 +843,22 @@ public class UI {
         y += gp.tileSize;
 
         if (npc.dialogues[npc.dialogueSet][npc.dialogueIndex] != null) {
-            currentDialogue = npc.dialogues[npc.dialogueSet][npc.dialogueIndex];
+            // currentDialogue = npc.dialogues[npc.dialogueSet][npc.dialogueIndex];
+
+            char characters[] = npc.dialogues[npc.dialogueSet][npc.dialogueIndex].toCharArray();
+            if (charIndex < characters.length) {
+
+                String s = String.valueOf(characters[charIndex]);
+                combinedText += s;
+                currentDialogue = combinedText;
+                charIndex++;
+            }
+
+
+
             if (gp.keyH.enterPressed) {
+                charIndex = 0;
+                combinedText = "";
                 if (gp.gameState == gp.dialogueState) {
                     npc.dialogueIndex++;
                     gp.keyH.enterPressed = false;

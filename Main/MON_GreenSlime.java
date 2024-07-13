@@ -14,12 +14,13 @@ public class MON_GreenSlime extends Entity{
         attack = 2;
         defense = 0;
         exp = 2;
+        // knockBackPower = gp.tileSize/16;
         projectile = new OBJ_Rock(gp);
 
-        solidArea.x = 3;
-        solidArea.y = 18;
-        solidArea.width = 42;
-        solidArea.height = 30;
+        solidArea.x = 1;
+        solidArea.y = 16;
+        solidArea.width = 46;
+        solidArea.height = 31;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
@@ -46,7 +47,7 @@ public class MON_GreenSlime extends Entity{
         if (onPath) {
 
             //Check if it stops checking
-            checkStopChasingOrNot(gp.player, 10, 100);
+            checkStopChasingOrNot(gp.player, 4, 100);
             // if (tileDistance > 15) {
             //     onPath = false;
             // }

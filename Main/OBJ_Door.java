@@ -6,12 +6,13 @@ import javax.imageio.ImageIO;
 public class OBJ_Door extends Entity{
     GamePanel gp;
     // boolean removed = false;
+    static final String objName = "Door";
 
     public OBJ_Door(GamePanel gp) {
         super(gp);
         this.gp = gp;
         removed = false;
-        name = "Door";
+        name = objName;
         type = typeObstacle;
         down1 = setUp("Objects/door", gp.tileSize, gp.tileSize);
 
