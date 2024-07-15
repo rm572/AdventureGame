@@ -68,8 +68,10 @@ public class Player extends Entity {
     }
     
     public void setDefaultValues() {
+        // worldX = gp.tileSize * 16;
+        // worldY = gp.tileSize * 25;
         worldX = gp.tileSize * 16;
-        worldY = gp.tileSize * 25;
+        worldY = gp.tileSize * 90;
         defaultSpeed = 4;
         speed = defaultSpeed;
         direction = "down";
@@ -248,6 +250,31 @@ public class Player extends Entity {
 
     // }*/
 
+    public boolean getOppositeCollision(String direction) {
+        switch (direction) {
+            case "up": return downCollision;
+            case "down": return upCollision;
+            case "left": return rightCollision;
+            case "right": return leftCollision;
+        }
+
+        return false;
+
+    }
+
+    public boolean getCollisionDirection(String direction) {
+        switch (direction) {
+            case "down": return downCollision;
+            case "up": return upCollision;
+            case "right": return rightCollision;
+            case "left": return leftCollision;
+        }
+
+        return false;
+
+    }
+
+
     public void update() {
         // System.out.println("Attacking? " + attacking);
         //Tile movement
@@ -262,22 +289,29 @@ public class Player extends Entity {
 
         // attacking = false;
         // if (moving) {attacking = false;}
+        // System.out.println("Knockback counter: " + knockBackCounter);
         
 
         //Standing still
         if (!moving) {        
             if (knockBack) {
+                System.out.println("CollisionOn1: " + collisionOn);
                 gp.cChecker.checkEntity(this, gp.npc);
-                gp.cChecker.checkEntity(this, gp.monster);        
+                System.out.println("CollisionOn2: " + collisionOn);
+                gp.cChecker.checkEntity(this, gp.monster);  
+                System.out.println("CollisionOn3: " + collisionOn);      
                 gp.cChecker.checkEntity(this, gp.iTile);
+                System.out.println("CollisionOn4: " + collisionOn);
                 gp.cChecker.checkTile(this);
+                System.out.println("CollisionOn5: " + collisionOn);
     
-                if (collisionOn) {
+                if (getCollisionDirection(knockBackDirection)) {
+                    System.out.println("Collision");
                     knockBackCounter = 0;
                     knockBack = false;
                     speed = defaultSpeed;
                 }
-                else if (!collisionOn) {
+                else /*if (!collisionOn)*/ {
                     switchCases(knockBackDirection, speed, true);
     
                 }

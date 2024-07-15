@@ -21,9 +21,9 @@ public class OBJ_Chest extends Entity{
         down1 = image;
         collision = true;
 
-        solidArea.x = 4;
+        solidArea.x = 1;
         solidArea.y = 16;
-        solidArea.width = 40;
+        solidArea.width = 46;
         solidArea.height = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;

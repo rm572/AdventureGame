@@ -10,7 +10,7 @@ public class EventHandler {
     int previousEventX, previousEventY;
     boolean canTouchEvent = true;
     boolean eventHappened = false;
-    int tempMap, tempCol, tempRow;
+    int tempMap, tempCol, tempRow, prevCol, prevRow;
 
     public EventHandler(GamePanel gp) {
         this.gp = gp;
@@ -60,10 +60,12 @@ public class EventHandler {
             canTouchEvent = true;
         }
         if (canTouchEvent) {
-            if (hit(0, 28, 25, "right")) {damagePit(gp.dialogueState);}
-            else if (hit(0, 16, 23, "any")) {teleport(1, 12, 12);}
-            else if (hit(1, 12, 14, "any")) {teleport(0, 16, 23);}
-            else if (hit(0, 13, 25, "left")) {healingPool(gp.dialogueState);}
+            // if (hit(0, 28, 25, "right")) {damagePit(gp.dialogueState);}
+            if (hit(0, 24, 69, "any")) {teleport(1, 12, 12);}
+            else if (hit(0, 77, 42, "any")) {teleport(1, 12, 12);}
+            else if (hit(0, 63, 82, "any")) {teleport(1, 12, 12);}
+            else if (hit(1, 12, 14, "any")) {teleport(0, prevCol, prevRow);}
+            // else if (hit(0, 13, 25, "left")) {healingPool(gp.dialogueState);}
             else if (hit(1, 12, 9, "up")) {speak(gp.npc[1][0]);}
             
         }
@@ -91,6 +93,8 @@ public class EventHandler {
                     eventHappened = true;
                     previousEventX = gp.player.worldX;
                     previousEventY = gp.player.worldY;
+                    prevCol = gp.player.worldX;
+                    prevRow = gp.player.worldY;
                 }
             }
     
