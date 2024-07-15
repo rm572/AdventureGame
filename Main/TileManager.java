@@ -43,6 +43,8 @@ public class TileManager {
                 collisionStatus.add(br.readLine());
             }
             br.close();
+
+            
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -272,7 +274,7 @@ public class TileManager {
             // System.out.println("before while loop");
             while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
                 String line = br.readLine();
-                System.out.println("line: " + line);
+                // System.out.println("line: " + line);
                 String numbers[] = line.split(" ");
                 while (col < gp.maxWorldCol) {
                     int num = Integer.parseInt(numbers[col]);
