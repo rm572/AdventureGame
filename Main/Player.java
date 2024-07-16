@@ -68,10 +68,10 @@ public class Player extends Entity {
     }
     
     public void setDefaultValues() {
-        // worldX = gp.tileSize * 16;
-        // worldY = gp.tileSize * 25;
-        worldX = gp.tileSize * 49;
-        worldY = gp.tileSize * 49;
+        worldX = gp.tileSize * 16;
+        worldY = gp.tileSize * 90;
+        // worldX = gp.tileSize * 49;
+        // worldY = gp.tileSize * 49;
         defaultSpeed = 8;
         speed = defaultSpeed;
         direction = "down";
@@ -117,7 +117,9 @@ public class Player extends Entity {
         currentWeapon.highlight = true;
         inventory.add(currentShield);
         currentShield.highlight = true;
+        inventory.add(new OBJ_Axe(gp));
         inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Lantern(gp));
     }
 
     public void setKnockBack(Entity entity, int knockBackPower) {
@@ -490,6 +492,25 @@ public class Player extends Entity {
         if (!checkFitsTileY()) {
             System.out.println("Y? " + checkFitsTileY());
         }
+
+        if (currentLight != null) {
+            System.out.println("Current Light life: " + currentLight.life);
+        
+            currentLight.life--;
+            if (currentLight.life <= 0) {
+                
+                for (int i = 0; i < inventory.size(); i++) {
+                    if (inventory.get(i) == currentLight) {
+                        inventory.remove(i);
+                        currentLight = null;
+                        lightUpdated = true;
+                        // gp.eManager.update();
+                    }
+                }
+                
+            }
+        }
+
         
         
         
@@ -719,6 +740,14 @@ public class Player extends Entity {
 
             if (gp.iTile[gp.currentMap][i].life == 0) {
                 gp.iTile[gp.currentMap][i] = gp.iTile[gp.currentMap][i].getDestroyedForm();
+                if (gp.iTile[gp.currentMap][i].checkedDrop == false) {
+                    gp.iTile[gp.currentMap][i].checkDrop();
+                    gp.iTile[gp.currentMap][i].checkedDrop = true;
+                    System.out.println("Check");
+
+                }
+                
+
             }
         }
     }

@@ -64,7 +64,7 @@ public class EventHandler {
             if (hit(0, 24, 69, "any")) {teleport(1, 12, 12);}
             else if (hit(0, 77, 42, "any")) {teleport(1, 12, 12);}
             else if (hit(0, 63, 82, "any")) {teleport(1, 12, 12);}
-            else if (hit(1, 12, 14, "any")) {teleport(0, prevCol, prevRow);}
+            else if (hit(1, 12, 14, "any")) {teleport(0, tempCol, tempRow);}
             // else if (hit(0, 13, 25, "left")) {healingPool(gp.dialogueState);}
             else if (hit(1, 12, 9, "up")) {speak(gp.npc[1][0]);}
             

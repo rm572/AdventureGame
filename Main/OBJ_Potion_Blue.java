@@ -1,16 +1,16 @@
-public class OBJ_Potion_Red extends Entity{
+public class OBJ_Potion_Blue extends Entity{
     GamePanel gp;
 
-    static final String objName = "Red Potion";
-    public OBJ_Potion_Red(GamePanel gp) {
+    static final String objName = "Blue Potion";
+    public OBJ_Potion_Blue(GamePanel gp) {
         super(gp);
         this.gp = gp;
         value = 5;
 
         type = typeConsumable;
         name = objName;
-        down1 = setUp("Objects/potion_red", gp.tileSize, gp.tileSize);
-        description = "{Red Potion}\nHeals your life by " + value;
+        down1 = setUp("Objects/potion_blue", gp.tileSize, gp.tileSize);
+        description = "{Blue Potion}\nRestores mana by " + value;
         price = 25;
         stackable = true;
         setDialogue();
@@ -18,7 +18,7 @@ public class OBJ_Potion_Red extends Entity{
 
     public void setDialogue() {
         dialogues[0][0] = "You drink the " + name + "!\n" + 
-            "Your life has been recovered by \n" + value + ".";
+            "Your mana has been recovered by \n" + value + ".";
     }
 
 
@@ -28,7 +28,7 @@ public class OBJ_Potion_Red extends Entity{
         // gp.ui.currentDialogue = "You drink the " + name + "!\n" + 
         //     "You life has been recovered by \n" + value + ".";
         startDialogue(this, 0);
-        entity.life += value;
+        entity.mana += value;
         return true;
     }
     

@@ -44,7 +44,7 @@ public class TileManager {
             }
             br.close();
 
-            
+
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -76,6 +76,8 @@ public class TileManager {
         }
 
         loadMap("C:/Users/rober/OneDrive/Programming/AdventureGame/res/Maps/editorMap.txt", 0);
+
+        loadMap("C:/Users/rober/OneDrive/Programming/AdventureGame/res/Maps/indoorMap.txt", 1);
         
         //
 
