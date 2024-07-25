@@ -20,7 +20,7 @@ public class TileManager {
     GamePanel gp;
     Tile[] tile;
     int mapTileNum[][][];
-    boolean drawPath = true;
+    boolean drawPath = false;
     
     //tile editor
     ArrayList<String> fileNames = new ArrayList<>();

@@ -235,9 +235,12 @@ public class Entity {
 
         }
         else {
+            System.out.println("The knock back attacker is: " + name);
             this.attacker = attacker;
             target.knockBackDirection = attacker.direction;
+            System.out.println("Before speed: " + target.speed);
             target.speed += knockBackPower;
+            System.out.println("After speed: " + target.speed);
             // switchCases(direction, gp.tileSize, false);
             target.knockBack = true;
         }
@@ -749,6 +752,7 @@ public class Entity {
                 gp.player.transparent = true;
                 if (gp.player.moving == false) {
                     setKnockBack(gp.player, this, knockBackPower);
+                    System.out.println("This knockback power is: " + knockBackPower);
                 }
                 
                 // knock(gp.player, this, knockBackPower);

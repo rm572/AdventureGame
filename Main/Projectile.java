@@ -28,6 +28,7 @@ public class Projectile extends Entity {
             boolean contactPlayer = gp.cChecker.checkPlayer(this);
             if (gp.player.invincible == false && contactPlayer) {
                 damagePlayer(attack);
+                System.out.println("Contacted player");
                 
                 generateParticle(user.projectile, gp.player);
                 alive = false;

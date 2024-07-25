@@ -60,12 +60,10 @@ public class EventHandler {
             canTouchEvent = true;
         }
         if (canTouchEvent) {
-            // if (hit(0, 28, 25, "right")) {damagePit(gp.dialogueState);}
             if (hit(0, 24, 69, "any")) {teleport(1, 12, 12);}
             else if (hit(0, 77, 42, "any")) {teleport(1, 12, 12);}
             else if (hit(0, 63, 82, "any")) {teleport(1, 12, 12);}
-            else if (hit(1, 12, 14, "any")) {teleport(0, tempCol, tempRow);}
-            // else if (hit(0, 13, 25, "left")) {healingPool(gp.dialogueState);}
+            else if (hit(1, 12, 14, "any")) {teleport(0, prevCol, prevRow);}
             else if (hit(1, 12, 9, "up")) {speak(gp.npc[1][0]);}
             
         }
@@ -93,8 +91,13 @@ public class EventHandler {
                     eventHappened = true;
                     previousEventX = gp.player.worldX;
                     previousEventY = gp.player.worldY;
-                    prevCol = gp.player.worldX;
-                    prevRow = gp.player.worldY;
+
+                    if (map == 0) {
+                        prevCol = gp.player.worldX/gp.tileSize;
+                        prevRow = gp.player.worldY/gp.tileSize;
+                    }
+                    // prevCol = gp.player.getCol()/gp.tileSize;
+                    // prevRow = gp.player.getRow()/gp.tileSize;
                 }
             }
     

@@ -10,7 +10,8 @@ public class OBJ_Rock extends Projectile {
 
         name = objName;
         speed = 2;
-        maxLife = 80;
+        // knockBackPower = 0;
+        maxLife = 120;
         life = maxLife;
         attack = 2;
         useCost = 1;

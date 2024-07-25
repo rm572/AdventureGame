@@ -738,7 +738,7 @@ public class UI {
             // g2.setFont(colonna);
             g2.setFont(pixel2);
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 75));
-            String text = "Blue Boy Adventure";
+            String text = "Pixel Adventure";
     
             int x = getXForCenteredText(text);
             int y = gp.tileSize * 3;

@@ -53,7 +53,7 @@ public class IT_DryTree extends InteractiveTile {
     }
 
     public void checkDrop() {
-        int i = new Random().nextInt(100)+1;
+        int i = new Random().nextInt(200)+1;
 
         if (i < 20) {
             dropItem(new OBJ_Heart(gp));

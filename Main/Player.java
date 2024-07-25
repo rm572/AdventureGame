@@ -297,18 +297,18 @@ public class Player extends Entity {
         //Standing still
         if (!moving) {        
             if (knockBack) {
-                System.out.println("CollisionOn1: " + collisionOn);
+                // System.out.println("CollisionOn1: " + collisionOn);
                 gp.cChecker.checkEntity(this, gp.npc);
-                System.out.println("CollisionOn2: " + collisionOn);
+                // System.out.println("CollisionOn2: " + collisionOn);
                 gp.cChecker.checkEntity(this, gp.monster);  
-                System.out.println("CollisionOn3: " + collisionOn);      
+                // System.out.println("CollisionOn3: " + collisionOn);      
                 gp.cChecker.checkEntity(this, gp.iTile);
-                System.out.println("CollisionOn4: " + collisionOn);
+                // System.out.println("CollisionOn4: " + collisionOn);
                 gp.cChecker.checkTile(this);
-                System.out.println("CollisionOn5: " + collisionOn);
+                // System.out.println("CollisionOn5: " + collisionOn);
     
                 if (getCollisionDirection(knockBackDirection)) {
-                    System.out.println("Collision");
+                    // System.out.println("Collision");
                     knockBackCounter = 0;
                     knockBack = false;
                     speed = defaultSpeed;
@@ -386,6 +386,7 @@ public class Player extends Entity {
         }
         //Moving
         else {
+            gp.cChecker.checkTile(this);
             //Checks if there needs to be recoil from an event
             // if (attacking) {
             //     attacking();
@@ -411,11 +412,13 @@ public class Player extends Entity {
                 displacement = (displacement + speed) % (gp.tileSize/3);
                 if (displacement == 0) {
                     moving = false;
+                    
                 }
+                // System.out.println("Moving? " + moving);
 
             }
             //checks recoil from npc collision
-            else if (displacement != 0){
+            else if (displacement != 0 && gp.cChecker.npcCollision){
                 switchCases(direction, displacement, false);
                 moving = false;
                 displacement = 0;
@@ -649,7 +652,7 @@ public class Player extends Entity {
 
     public void setDefaultPositions() {
         worldX = gp.tileSize * 16;
-        worldY = gp.tileSize * 25;
+        worldY = gp.tileSize * 90;
         direction = "down";
     }
 

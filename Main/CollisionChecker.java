@@ -1,5 +1,6 @@
 public class CollisionChecker {
     GamePanel gp;
+    boolean npcCollision = false;
 
     public CollisionChecker(GamePanel gp) {
         this.gp = gp;
@@ -152,6 +153,7 @@ public class CollisionChecker {
                         }
                         break;
                     case "right":
+                        entity.solidArea.x += entity.speed;
                         if (entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea)) {
                             if (gp.obj[gp.currentMap][i].collision == true) {
                                 entity.collisionOn = true;
@@ -211,6 +213,9 @@ public class CollisionChecker {
                                 
                                 entity.entityCollision = true;
                                 index = i;
+                                if (target[gp.currentMap][i].type == entity.typeNPC) {
+                                    npcCollision = true;
+                                }
                                 // System.out.println("Entity Collision: up");
                             }
 
@@ -232,6 +237,9 @@ public class CollisionChecker {
                                 entity.rightCollision = false;
                                 
                                 entity.entityCollision = true;
+                                if (target[gp.currentMap][i].type == entity.typeNPC) {
+                                    npcCollision = true;
+                                }
                                 // System.out.println("Entity Collision: down");
                             }
                         }
@@ -250,6 +258,9 @@ public class CollisionChecker {
                                 entity.rightCollision = false;
                                 
                                 entity.entityCollision = true;
+                                if (target[gp.currentMap][i].type == entity.typeNPC) {
+                                    npcCollision = true;
+                                }
                                 // System.out.println("Entity Collision: left");
                             }
                         }
@@ -268,6 +279,9 @@ public class CollisionChecker {
                                 entity.rightCollision = true;
                                 
                                 entity.entityCollision = true;
+                                if (target[gp.currentMap][i].type == entity.typeNPC) {
+                                    npcCollision = true;
+                                }
                                 // System.out.println("Entity Collision: right");
                             }
                         }
