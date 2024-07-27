@@ -117,8 +117,8 @@ public class Player extends Entity {
         currentWeapon.highlight = true;
         inventory.add(currentShield);
         currentShield.highlight = true;
-        // inventory.add(new OBJ_Axe(gp));
-        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Axe(gp));
+        // inventory.add(new OBJ_Key(gp));
         inventory.add(new OBJ_Lantern(gp));
     }
 

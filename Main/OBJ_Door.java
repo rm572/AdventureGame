@@ -43,10 +43,9 @@ public class OBJ_Door extends Entity{
                     e.amount--;
                 }
                 else {
-                    inventory.remove(e);
+                    gp.player.inventory.remove(e);
                 }
                 removed = true;
-                gp.doorCounter--;
                 break;
             }
         }
@@ -59,6 +58,7 @@ public class OBJ_Door extends Entity{
 
     public void setDialogue() {
         dialogues[0][0] = "You used a key! The door is now open";
-        dialogues[1][0] = "You need a key to open the door!";
+        // dialogues[1][0] = "You need a key to open the door!\nOpen chests or buy with coins\nGet coins by destroying trees or monsters";
+        dialogues[1][0] = "You need a key to open the door!\nOpen chests or buy with coins\nGet coins by killing monsters or trees";
     }
 }
