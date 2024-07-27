@@ -95,6 +95,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int sleepState = 9;
     public final int mapState = 10;
 
+    public int doorCounter = 11;
+
 
 
     public GamePanel() {
@@ -272,6 +274,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
 
         if (gameState == playState) {
+            boolean monstersGone = true;
             player.update();
             for (int i = 0; i < npc[1].length; i++) {
                 if (npc[currentMap][i] != null) {
@@ -281,6 +284,7 @@ public class GamePanel extends JPanel implements Runnable {
 
             for (int i = 0; i < monster[1].length; i++) {
                 if (monster[currentMap][i] != null) {
+                    monstersGone = false;
                     if (monster[currentMap][i].alive && monster[currentMap][i].dying == false) {
                         monster[currentMap][i].update();
                     }
@@ -550,6 +554,7 @@ public class GamePanel extends JPanel implements Runnable {
             for (int i = 0; i < monster[1].length; i++) {
                 if (monster[currentMap][i] != null) {
                     monster[currentMap][i].draw(g2);
+                    
                 }
             }
 

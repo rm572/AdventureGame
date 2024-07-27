@@ -105,6 +105,8 @@ public class UI {
 
         // PLAY STATE
         if (gp.gameState == gp.playState) {
+            // gp.stopMusic();
+            // gp.playMusic(0);
             drawPlayerLife();
             drawPlayerMana();
             drawMessage();
@@ -145,6 +147,8 @@ public class UI {
 
         // TRADE STATE
         if (gp.gameState == gp.tradeState) {
+            // gp.stopMusic();
+            // gp.playMusic(1);
             drawTradeScreen();
         }
 

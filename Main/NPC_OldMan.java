@@ -81,11 +81,15 @@ public class NPC_OldMan extends Entity {
         dialogues[0][2] = "I used to be a great wizard";
         dialogues[0][3] = "Well, good luck on you.";
 
-        dialogues[1][0] = "If you become tired, rest at the water";
-        dialogues[1][1] = "However, the monsters reappear if you rest.\nI don't know why but that's how it works.";
-        dialogues[1][2] = "In any case, don't push yourself too hard.";
+        dialogues[1][0] = "If you meet an unfortunate end...\nI will bring you back here";
+        dialogues[1][1] = "However, the monsters will reappear";
+        dialogues[1][2] = "Don't push yourself too hard.";
 
-        dialogues[2][0] = "I wonder how to open that door...";
+        dialogues[2][0] = "Use the keys to open doors...\nUse the axe to cut trees...\nDefeat the monsters...";
+        dialogues[2][1] = "Find the treasure!";
+        dialogues[2][2] = "Good luck, lad!";
+
+        // dialogues[3][0] = "Good luck, lad!";
 
     }
 

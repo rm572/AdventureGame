@@ -66,6 +66,8 @@ public class KeyHandler implements KeyListener{
         if (code == KeyEvent.VK_ENTER) {
             enterPressed = true;
         }
+        // gp.stopMusic();
+        // gp.playMusic(1);
 
         if (gp.ui.substate == 0) {
             if (code == KeyEvent.VK_W) {
@@ -83,6 +85,8 @@ public class KeyHandler implements KeyListener{
             }
 
             if (code == KeyEvent.VK_ESCAPE) {
+                // gp.stopMusic();
+                // gp.playMusic(0);
                 gp.gameState = gp.playState;
             }
         }
@@ -188,6 +192,7 @@ public class KeyHandler implements KeyListener{
             // if (gp.ui.titleScreenState == 0) {
                 if (code == KeyEvent.VK_S) {
                     gp.ui.commandNum = (gp.ui.commandNum + 1) % 3;
+                    gp.playSE(2);
                 }
     
                 if (code == KeyEvent.VK_W) {
@@ -197,6 +202,7 @@ public class KeyHandler implements KeyListener{
                     else {
                         gp.ui.commandNum--;
                     }
+                    gp.playSE(2);
                 }
     
                 if (code == KeyEvent.VK_ENTER) {
@@ -204,7 +210,7 @@ public class KeyHandler implements KeyListener{
                     if (gp.ui.commandNum == 0) {
                         gp.gameState = gp.playState;
                         // gp.stopMusic();
-                        // gp.playMusic(1);
+                        gp.playMusic(0);
 
                         //Goes to character selection screen
                         // gp.ui.titleScreenState = 1;
@@ -215,7 +221,7 @@ public class KeyHandler implements KeyListener{
                         gp.saveLoad.load();
                         gp.gameState = gp.playState;
                         // gp.stopMusic();
-                        // gp.playMusic(1);
+                        gp.playMusic(0);
                     }
     
                     //quit

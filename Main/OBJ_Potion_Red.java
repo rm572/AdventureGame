@@ -11,7 +11,7 @@ public class OBJ_Potion_Red extends Entity{
         name = objName;
         down1 = setUp("Objects/potion_red", gp.tileSize, gp.tileSize);
         description = "{Red Potion}\nHeals your life by " + value;
-        price = 25;
+        price = 5;
         stackable = true;
         setDialogue();
     }

@@ -11,7 +11,7 @@ public class OBJ_Potion_Blue extends Entity{
         name = objName;
         down1 = setUp("Objects/potion_blue", gp.tileSize, gp.tileSize);
         description = "{Blue Potion}\nRestores mana by " + value;
-        price = 25;
+        price = 5;
         stackable = true;
         setDialogue();
     }

@@ -39,8 +39,14 @@ public class OBJ_Door extends Entity{
             if (e.name.equals("Key")) {
                 // gp.ui.currentDialogue = "You used a key! The door is now open";
                 startDialogue(this, 0);
-                gp.player.inventory.remove(e);
+                if (e.amount > 1) {
+                    e.amount--;
+                }
+                else {
+                    inventory.remove(e);
+                }
                 removed = true;
+                gp.doorCounter--;
                 break;
             }
         }

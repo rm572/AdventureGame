@@ -17,7 +17,7 @@ public class OBJ_Key extends Entity{
         type = typeConsumable;
         down1 = setUp("Objects/key", gp.tileSize, gp.tileSize);
         description = "{" + name + "}\nIt opens a door.";
-        price = 100;
+        price = 20;
         stackable = true;
         setDialogue();
         // try {

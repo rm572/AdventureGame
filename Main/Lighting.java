@@ -150,7 +150,7 @@ public class Lighting {
         if (dayState == day) {
             dayCounter++;
 
-            if (dayCounter > 900/*1000000000*/) {
+            if (dayCounter > /*900*/1000000000) {
                 dayState = dusk;
                 dayCounter = 0;
             }

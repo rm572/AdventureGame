@@ -165,6 +165,14 @@ public class EventHandler {
         tempMap = map;
         tempCol = col;
         tempRow = row;
+        if (map == 1) {
+            gp.stopMusic();
+            gp.playMusic(1);
+        }
+        else if (map == 0) {
+            gp.stopMusic();
+            gp.playMusic(0);
+        }
         // gp.currentMap = map;
         // gp.player.worldX = gp.tileSize * col;
         // gp.player.worldY = gp.tileSize * row + gp.player.displacement;
