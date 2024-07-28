@@ -47,7 +47,7 @@ public class MON_GreenSlime extends Entity{
         if (onPath) {
 
             //Check if it stops checking
-            checkStopChasingOrNot(gp.player, 4, 100);
+            checkStopChasingOrNot(gp.player, 10, 100);
             // if (tileDistance > 15) {
             //     onPath = false;
             // }
@@ -65,7 +65,7 @@ public class MON_GreenSlime extends Entity{
             searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
 
             //Checks if it shoots projectile
-            checkShootOrNot(200, 30);
+            checkShootOrNot(100, 30);
             // int i = new Random().nextInt(200)+1;
             // if (i > 197 && projectile.alive == false && shotAvailableCounter == 30) {
             //     projectile.set(worldX, worldY, direction, true, this);
@@ -81,7 +81,7 @@ public class MON_GreenSlime extends Entity{
         }
         else {
             //Check if it starts chasing
-            checkStartChasingOrNot(gp.player, 5, 100);
+            checkStartChasingOrNot(gp.player, 8, 100);
             // if (tileDistance < 5) {
             //     int i = new Random().nextInt(100)+1;
             //     if (i > 50) {

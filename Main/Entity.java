@@ -235,12 +235,12 @@ public class Entity {
 
         }
         else {
-            System.out.println("The knock back attacker is: " + name);
+            // System.out.println("The knock back attacker is: " + name);
             this.attacker = attacker;
             target.knockBackDirection = attacker.direction;
-            System.out.println("Before speed: " + target.speed);
+            // System.out.println("Before speed: " + target.speed);
             target.speed += knockBackPower;
-            System.out.println("After speed: " + target.speed);
+            // System.out.println("After speed: " + target.speed);
             // switchCases(direction, gp.tileSize, false);
             target.knockBack = true;
         }
@@ -400,7 +400,7 @@ public class Entity {
             // }
             checkCollision();
 
-            System.out.println("Knockback");
+            // System.out.println("Knockback");
             if (collisionOn) {
                 knockBackCounter = 0;
                 knockBack = false;
@@ -752,7 +752,7 @@ public class Entity {
                 gp.player.transparent = true;
                 if (gp.player.moving == false) {
                     setKnockBack(gp.player, this, knockBackPower);
-                    System.out.println("This knockback power is: " + knockBackPower);
+                    // System.out.println("This knockback power is: " + knockBackPower);
                 }
                 
                 // knock(gp.player, this, knockBackPower);
@@ -1001,11 +1001,11 @@ public class Entity {
 
 
             //Goes to a specific location
-            int nextCol = gp.pFinder.pathList.get(0).col;
-            int nextRow = gp.pFinder.pathList.get(0).row;
-            if (nextCol == goalCol && nextRow == goalRow) {
-                moving = false;
-            }
+            // int nextCol = gp.pFinder.pathList.get(0).col;
+            // int nextRow = gp.pFinder.pathList.get(0).row;
+            // if (nextCol == goalCol && nextRow == goalRow) {
+            //     moving = false;
+            // }
             
 
         }

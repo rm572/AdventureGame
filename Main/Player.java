@@ -118,7 +118,11 @@ public class Player extends Entity {
         inventory.add(currentShield);
         currentShield.highlight = true;
         inventory.add(new OBJ_Axe(gp));
-        // inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Key(gp));
+        
+        inventory.add(new OBJ_Key(gp));
+        
+        inventory.add(new OBJ_Key(gp));
         inventory.add(new OBJ_Lantern(gp));
     }
 
@@ -276,6 +280,14 @@ public class Player extends Entity {
 
     }
 
+    public int getCol() {
+        return worldX/gp.tileSize;
+    }
+
+    
+    public int getRow() {
+        return worldY/gp.tileSize;
+    }
 
     public void update() {
         // System.out.println("Attacking? " + attacking);
@@ -285,6 +297,11 @@ public class Player extends Entity {
 
         int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
         contactMonster(monsterIndex);
+        if (getCol() != 84 && getRow() != 66) {
+            gp.eHandler.healActive = true;
+            gp.eHandler.healCounter = 0;
+            
+        }
         gp.eHandler.checkEvent();
 
         gp.cChecker.checkEntity(this, gp.iTile);
@@ -494,6 +511,18 @@ public class Player extends Entity {
 
         if (!checkFitsTileY()) {
             System.out.println("Y? " + checkFitsTileY());
+        }
+
+        if (!checkFitsTileX() && !moving) {
+            System.out.println("X Fixed!");
+            switchCases(knockBackDirection, displacement, true);
+            displacement = 0;
+        }
+
+        if (!checkFitsTileY() && !moving) {
+            System.out.println("X Fixed!");
+            switchCases(knockBackDirection, displacement, true);
+            displacement = 0;
         }
 
         if (currentLight != null) {
@@ -746,7 +775,7 @@ public class Player extends Entity {
                 if (gp.iTile[gp.currentMap][i].checkedDrop == false) {
                     gp.iTile[gp.currentMap][i].checkDrop();
                     gp.iTile[gp.currentMap][i].checkedDrop = true;
-                    System.out.println("Check");
+                    // System.out.println("Check");
 
                 }
                 

@@ -203,7 +203,7 @@ public class AssetSetter {
     public void setMonster() {
         int mapNum = 0;
         int i = 0;
-        /*
+        
         gp.monster[mapNum][i] = new MON_GreenSlime(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize*43;
         gp.monster[mapNum][i].worldY = gp.tileSize*89;
@@ -308,8 +308,26 @@ public class AssetSetter {
         gp.monster[mapNum][i].worldX = gp.tileSize*19;
         gp.monster[mapNum][i].worldY = gp.tileSize*24;
         i++;
-        */
+
+        gp.monster[mapNum][i] = new MON_Spider(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize*19;
+        gp.monster[mapNum][i].worldY = gp.tileSize*90;
+        i++;
+
+
         
+        
+    }
+
+    public void setHealingTile() {
+        int mapNum = 0;
+        int i = 0;
+
+        gp.healTile[mapNum][i] = new HealingTile(gp, 84, 8);
+        i++;
+
+        gp.healTile[mapNum][i] = new HealingTile(gp, 84, 66);
+        i++;
     }
 
     public void setInteractiveTile() {

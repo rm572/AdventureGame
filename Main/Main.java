@@ -1,3 +1,4 @@
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class Main {
@@ -13,6 +14,7 @@ public class Main {
         window.setResizable(false);
         // window.setResizable(true);
         window.setTitle("2D Adventure");
+        new Main().setIcon();
 
         //Full screen code
         // window.setUndecorated(true); //Removes white bar at top
@@ -33,5 +35,10 @@ public class Main {
 
         gamePanel.setUpGame();
         gamePanel.startGameThread();
+    }
+
+    public void setIcon() {
+        ImageIcon icon = new ImageIcon("C:/Users/rober/OneDrive/Programming/AdventureGame/res/Player/new_down_1.png");
+        window.setIconImage(icon.getImage());
     }
 }

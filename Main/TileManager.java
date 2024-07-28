@@ -258,7 +258,7 @@ public class TileManager {
         UtilityTool uTool = new UtilityTool();
         try {
             tile[index] = new Tile();
-            tile[index].image = ImageIO.read(new File("C:/Users/rober/OneDrive/Programming/AdventureGame/res/Tile_editor/" + imageName/* + ".png"*/));
+            tile[index].image = ImageIO.read(new File("C:/Users/rober/OneDrive/Programming/AdventureGame/res/Tile_Editor/" + imageName/* + ".png"*/));
             tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
             tile[index].collision = collision;
         }

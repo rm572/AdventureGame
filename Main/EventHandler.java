@@ -10,6 +10,8 @@ public class EventHandler {
     int previousEventX, previousEventY;
     boolean canTouchEvent = true;
     boolean eventHappened = false;
+    int healCounter = 0;
+    boolean healActive = true;
     int tempMap, tempCol, tempRow, prevCol, prevRow;
 
     public EventHandler(GamePanel gp) {
@@ -58,6 +60,13 @@ public class EventHandler {
         int distance = Math.max(xDistance, yDistance);
         if (distance > gp.tileSize) {
             canTouchEvent = true;
+            healActive = true;
+            if (healCounter >= 180) {
+                healCounter = 0;
+            }
+            else if (healCounter != 0) {
+                healCounter++;
+            }
         }
         if (canTouchEvent) {
             if (hit(0, 24, 69, "any")) {teleport(1, 12, 12);}
@@ -65,8 +74,13 @@ public class EventHandler {
             else if (hit(0, 63, 82, "any")) {teleport(1, 12, 12);}
             else if (hit(1, 12, 14, "any")) {teleport(0, prevCol, prevRow);}
             else if (hit(1, 12, 9, "up")) {speak(gp.npc[1][0]);}
-            
+            else if (hit(0, 84, 8, "any")) {healingPool(gp.dialogueState);}
+            else if (hit(0, 84, 66, "any")) {healingPool(gp.dialogueState);}    
         }
+
+        // System.out.println("Heal Counter: " + healCounter);
+        // System.out.println("Active? " + healActive);
+
         
         // if (hit(0, 25, 23, "any")) {teleport(25, 23, 36, 39, gp.dialogueState);}
         // if (hit(0, 30, 39, "any")) {teleport(1,30, 39, 25, 25, gp.dialogueState);}
@@ -100,6 +114,7 @@ public class EventHandler {
                     // prevRow = gp.player.getRow()/gp.tileSize;
                 }
             }
+
     
     
             gp.player.solidArea.x = gp.player.solidAreaDefaultX;
@@ -135,7 +150,20 @@ public class EventHandler {
 
     public void healingPool(int gameState) {
 
-        if (gp.keyH.enterPressed == true) {
+        // if (gp.keyH.enterPressed == true) {
+        //     gp.gameState = gameState;
+        //     // gp.player.attackCancel = true;
+        //     // gp.ui.currentDialogue = "You drink the water.\nYour life and mana have been \nrecovered.\nYour progress has been saved";
+        //     eventMaster.startDialogue(eventMaster, 1);
+        //     gp.player.life = gp.player.maxLife;
+        //     gp.player.mana = gp.player.maxMana;
+
+        //     gp.aSetter.setMonster();
+
+        //     gp.saveLoad.save();
+        // }
+
+        if (healActive && healCounter == 0) {
             gp.gameState = gameState;
             // gp.player.attackCancel = true;
             // gp.ui.currentDialogue = "You drink the water.\nYour life and mana have been \nrecovered.\nYour progress has been saved";
@@ -146,6 +174,15 @@ public class EventHandler {
             gp.aSetter.setMonster();
 
             gp.saveLoad.save();
+            healActive = false;
+
+        }
+        else {
+            healCounter++;
+            if (healCounter >= 180) {
+                healCounter = 0;
+                healActive = true;
+            }
         }
     }
     /*

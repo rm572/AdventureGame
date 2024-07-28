@@ -72,6 +72,7 @@ public class GamePanel extends JPanel implements Runnable {
     Entity obj[][] = new Entity[maxMap][50];
     Entity npc[][] = new Entity[maxMap][10];
     InteractiveTile iTile[][] = new InteractiveTile[maxMap][100];
+    HealingTile healTile[][] = new HealingTile[maxMap][100];
     Entity[][] monster = new Entity[maxMap][100];
     ArrayList<Entity> entityList = new ArrayList<>();
     // ArrayList<Entity> projectileList = new ArrayList<>();
@@ -113,6 +114,7 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setNPC();
         aSetter.setMonster();
         aSetter.setInteractiveTile();
+        aSetter.setHealingTile();
         eManager.setup();
         // playMusic(0);
         gameState = titleState;
@@ -276,6 +278,8 @@ public class GamePanel extends JPanel implements Runnable {
         if (gameState == playState) {
             boolean monstersGone = true;
             player.update();
+            
+
             for (int i = 0; i < npc[1].length; i++) {
                 if (npc[currentMap][i] != null) {
                     npc[currentMap][i].update();
@@ -343,6 +347,13 @@ public class GamePanel extends JPanel implements Runnable {
                     iTile[currentMap][i].update();
                 }
             }
+
+            for (int i = 0; i < healTile[1].length; i++) {
+                if (healTile[currentMap][i] != null) {
+                    healTile[currentMap][i].update();
+                }
+            }
+
             if (currentMap == 0) {
                 eManager.update();
             }
@@ -379,6 +390,13 @@ public class GamePanel extends JPanel implements Runnable {
                     iTile[currentMap][i].draw(g2);
                 }
             }
+
+            for (int i = 0; i < healTile[1].length; i++) {
+                if (healTile[currentMap][i] != null) {
+                    healTile[currentMap][i].draw(g2);
+                }
+            }
+
             
             // This one works fine for tile-based movement
             //object
@@ -532,6 +550,12 @@ public class GamePanel extends JPanel implements Runnable {
             for (int i = 0; i < iTile[1].length; i++) {
                 if (iTile[currentMap][i] != null) {
                     iTile[currentMap][i].draw(g2);
+                }
+            }
+
+            for (int i = 0; i < healTile[1].length; i++) {
+                if (healTile[currentMap][i] != null) {
+                    healTile[currentMap][i].draw(g2);
                 }
             }
             
