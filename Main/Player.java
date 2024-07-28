@@ -83,7 +83,8 @@ public class Player extends Entity {
         mana = maxMana;
         ammo = 10;
         level = 1;
-        strength = 1;
+        // strength = 1;
+        strength = 50;
         dexterity = 1;
         exp = 0;
         nextLevelExp = 5;
@@ -496,34 +497,35 @@ public class Player extends Entity {
             mana = maxMana;
         }
 
-        if (life <= 0) {
-            gp.ui.commandNum = -1;
-            gp.gameState = gp.gameOverState;
-        }
+        //Lets player die
+        // if (life <= 0) {
+        //     gp.ui.commandNum = -1;
+        //     gp.gameState = gp.gameOverState;
+        // }
 
 
 
         keyH.enterPressed = false;
 
-        if (!checkFitsTileX()) {
-            System.out.println("X? " + checkFitsTileX());
-        }
+        // if (!checkFitsTileX()) {
+        //     System.out.println("X? " + checkFitsTileX());
+        // }
 
-        if (!checkFitsTileY()) {
-            System.out.println("Y? " + checkFitsTileY());
-        }
+        // if (!checkFitsTileY()) {
+        //     System.out.println("Y? " + checkFitsTileY());
+        // }
 
-        if (!checkFitsTileX() && !moving) {
-            System.out.println("X Fixed!");
-            switchCases(knockBackDirection, displacement, true);
-            displacement = 0;
-        }
+        // if (!checkFitsTileX() && !moving) {
+        //     System.out.println("X Fixed!");
+        //     switchCases(knockBackDirection, displacement, true);
+        //     displacement = 0;
+        // }
 
-        if (!checkFitsTileY() && !moving) {
-            System.out.println("X Fixed!");
-            switchCases(knockBackDirection, displacement, true);
-            displacement = 0;
-        }
+        // if (!checkFitsTileY() && !moving) {
+        //     System.out.println("X Fixed!");
+        //     switchCases(knockBackDirection, displacement, true);
+        //     displacement = 0;
+        // }
 
         if (currentLight != null) {
             System.out.println("Current Light life: " + currentLight.life);
