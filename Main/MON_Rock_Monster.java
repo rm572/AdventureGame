@@ -1,19 +1,19 @@
 import java.util.Random;
 
-public class MON_Spider extends Entity{
+public class MON_Rock_Monster extends Entity{
     
-    public MON_Spider(GamePanel gp) {
+    public MON_Rock_Monster(GamePanel gp) {
         super(gp);
 
         type = typeMonster;
-        name = "Spider";
-        defaultSpeed = 3;
+        name = "Rock Monster";
+        defaultSpeed = 1;
         speed = defaultSpeed;
-        maxLife = 3;
+        maxLife = 15;
         life = maxLife;
-        attack = 3;
-        defense = 1;
-        exp = 7;
+        attack = 5;
+        defense = 4;
+        exp = 20;
 
         solidArea.x = 1;
         solidArea.y = 1;
@@ -26,14 +26,14 @@ public class MON_Spider extends Entity{
     }
 
     public void getImage() {
-        up1 = setUp("Monster/spider_up_1", gp.tileSize, gp.tileSize);
-        up2 = setUp("Monster/spider_up_2", gp.tileSize, gp.tileSize);
-        down1 = setUp("Monster/spider_down_1", gp.tileSize, gp.tileSize);
-        down2 = setUp("Monster/spider_down_2", gp.tileSize, gp.tileSize);
-        left1 = setUp("Monster/spider_left_1", gp.tileSize, gp.tileSize);
-        left2 = setUp("Monster/spider_left_2", gp.tileSize, gp.tileSize);
-        right1 = setUp("Monster/spider_right_1", gp.tileSize, gp.tileSize);
-        right2 = setUp("Monster/spider_right_2", gp.tileSize, gp.tileSize);
+        up1 = setUp("Monster/rock_monster_up_1", gp.tileSize, gp.tileSize);
+        up2 = setUp("Monster/rock_monster_up_2", gp.tileSize, gp.tileSize);
+        down1 = setUp("Monster/rock_monster_down_1", gp.tileSize, gp.tileSize);
+        down2 = setUp("Monster/rock_monster_down_2", gp.tileSize, gp.tileSize);
+        left1 = setUp("Monster/rock_monster_left_1", gp.tileSize, gp.tileSize);
+        left2 = setUp("Monster/rock_monster_left_2", gp.tileSize, gp.tileSize);
+        right1 = setUp("Monster/rock_monster_right_1", gp.tileSize, gp.tileSize);
+        right2 = setUp("Monster/rock_monster_right_2", gp.tileSize, gp.tileSize);
     }
 
     public void setAction() {
@@ -43,11 +43,11 @@ public class MON_Spider extends Entity{
         // int tileDistance = (xDistance + yDistance)/gp.tileSize;
 
         if (onPath) {
-            checkStopChasingOrNot(gp.player, 20, 100);
+            checkStopChasingOrNot(gp.player, 5, 100);
             searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
         }
         else {
-            checkStartChasingOrNot(gp.player, 12, 100);
+            checkStartChasingOrNot(gp.player, 5, 100);
             getRandomDirection(100);
         }
     }

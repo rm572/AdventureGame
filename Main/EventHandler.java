@@ -60,13 +60,13 @@ public class EventHandler {
         int distance = Math.max(xDistance, yDistance);
         if (distance > gp.tileSize) {
             canTouchEvent = true;
-            healActive = true;
-            if (healCounter >= 180) {
-                healCounter = 0;
-            }
-            else if (healCounter != 0) {
-                healCounter++;
-            }
+            // healActive = true;
+            // if (healCounter >= 180) {
+            //     healCounter = 0;
+            // }
+            // else {
+            //     healCounter++;
+            // }
         }
         if (canTouchEvent) {
             if (hit(0, 24, 69, "any")) {teleport(1, 12, 12);}
@@ -74,8 +74,9 @@ public class EventHandler {
             else if (hit(0, 63, 82, "any")) {teleport(1, 12, 12);}
             else if (hit(1, 12, 14, "any")) {teleport(0, prevCol, prevRow);}
             else if (hit(1, 12, 9, "up")) {speak(gp.npc[1][0]);}
-            else if (hit(0, 84, 8, "any")) {healingPool(gp.dialogueState);}
+            else if (hit(0, 84, 33, "any")) {healingPool(gp.dialogueState);}
             else if (hit(0, 84, 66, "any")) {healingPool(gp.dialogueState);}    
+            else if (hit(0, 76, 87, "any")) {enterChamber();}
         }
 
         // System.out.println("Heal Counter: " + healCounter);
@@ -163,7 +164,7 @@ public class EventHandler {
         //     gp.saveLoad.save();
         // }
 
-        if (healActive && healCounter == 0) {
+        if (healActive) {
             gp.gameState = gameState;
             // gp.player.attackCancel = true;
             // gp.ui.currentDialogue = "You drink the water.\nYour life and mana have been \nrecovered.\nYour progress has been saved";
@@ -196,6 +197,12 @@ public class EventHandler {
 
     }
     */
+
+    public void enterChamber() {
+        gp.obj[0][49] = new OBJ_Door_Gold(gp);
+        gp.obj[0][49].worldX = 75 * gp.tileSize;
+        gp.obj[0][49].worldY = 87 * gp.tileSize;
+    }
 
     public void teleport(int map, int col, int row) {
         gp.gameState = gp.transitionState;

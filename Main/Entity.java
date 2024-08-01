@@ -411,7 +411,7 @@ public class Entity {
 
             }
             knockBackCounter++;
-            if (knockBackCounter == gp.tileSize/3) {
+            if (knockBackCounter == 12) {
                 knockBackCounter = 0;
                 knockBack = false;
                 speed = defaultSpeed;

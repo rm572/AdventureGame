@@ -83,7 +83,8 @@ public class NPC_OldMan extends Entity {
 
         dialogues[1][0] = "If you meet an unfortunate end...\nI will bring you back here";
         dialogues[1][1] = "However, the monsters will reappear";
-        dialogues[1][2] = "Don't push yourself too hard.";
+        dialogues[1][2] = "Monsters will also reappear when\nyou use the healing pools";
+        dialogues[1][3] = "Hope this helps!\nDon't push yourself too hard.";
 
         dialogues[2][0] = "Use the keys to open doors...\nUse the axe to cut trees...\nDefeat the monsters...";
         dialogues[2][1] = "Find the treasure!";

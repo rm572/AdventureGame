@@ -15,10 +15,11 @@ public class MON_Spider_Red extends Entity{
         defense = 1;
         exp = 15;
 
+
         solidArea.x = 1;
-        solidArea.y = 16;
+        solidArea.y = 1;
         solidArea.width = 46;
-        solidArea.height = 31;
+        solidArea.height = 46;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
@@ -26,14 +27,22 @@ public class MON_Spider_Red extends Entity{
     }
 
     public void getImage() {
-        up1 = setUp("Monster/spider_red_up_1", gp.tileSize, gp.tileSize);
-        up2 = setUp("Monster/spider_red_up_2", gp.tileSize, gp.tileSize);
-        down1 = setUp("Monster/spider_red_down_1", gp.tileSize, gp.tileSize);
-        down2 = setUp("Monster/spider_red_down_2", gp.tileSize, gp.tileSize);
-        left1 = setUp("Monster/spider_red_left_1", gp.tileSize, gp.tileSize);
-        left2 = setUp("Monster/spider_red_left_2", gp.tileSize, gp.tileSize);
-        right1 = setUp("Monster/spider_red_right_1", gp.tileSize, gp.tileSize);
-        right2 = setUp("Monster/spider_red_right_2", gp.tileSize, gp.tileSize);
+        // up1 = setUp("Monster/spider_red_up_1", gp.tileSize, gp.tileSize);
+        // up2 = setUp("Monster/spider_red_up_2", gp.tileSize, gp.tileSize);
+        // down1 = setUp("Monster/spider_red_down_1", gp.tileSize, gp.tileSize);
+        // down2 = setUp("Monster/spider_red_down_2", gp.tileSize, gp.tileSize);
+        // left1 = setUp("Monster/spider_red_left_1", gp.tileSize, gp.tileSize);
+        // left2 = setUp("Monster/spider_red_left_2", gp.tileSize, gp.tileSize);
+        // right1 = setUp("Monster/spider_red_right_1", gp.tileSize, gp.tileSize);
+        // right2 = setUp("Monster/spider_red_right_2", gp.tileSize, gp.tileSize);
+        up1 = setUp("Monster/new_spider_red_up_1", gp.tileSize, gp.tileSize);
+        up2 = setUp("Monster/new_spider_red_up_2", gp.tileSize, gp.tileSize);
+        down1 = setUp("Monster/new_spider_red_down_1", gp.tileSize, gp.tileSize);
+        down2 = setUp("Monster/new_spider_red_down_2", gp.tileSize, gp.tileSize);
+        left1 = setUp("Monster/new_spider_red_left_1", gp.tileSize, gp.tileSize);
+        left2 = setUp("Monster/new_spider_red_left_2", gp.tileSize, gp.tileSize);
+        right1 = setUp("Monster/new_spider_red_right_1", gp.tileSize, gp.tileSize);
+        right2 = setUp("Monster/new_spider_red_right_2", gp.tileSize, gp.tileSize);
     }
 
     public void setAction() {
@@ -48,7 +57,7 @@ public class MON_Spider_Red extends Entity{
         }
         else {
             checkStartChasingOrNot(gp.player, 15, 100);
-            getRandomDirection(100);
+            // getRandomDirection(100);
         }
     }
 

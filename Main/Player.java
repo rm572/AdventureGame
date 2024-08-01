@@ -68,8 +68,10 @@ public class Player extends Entity {
     }
     
     public void setDefaultValues() {
-        worldX = gp.tileSize * 16;
-        worldY = gp.tileSize * 90;
+        // worldX = gp.tileSize * 16;
+        // worldY = gp.tileSize * 90;
+        worldX = gp.tileSize * 75;
+        worldY = gp.tileSize * 84;
         // worldX = gp.tileSize * 49;
         // worldY = gp.tileSize * 49;
         defaultSpeed = 8;
@@ -120,9 +122,9 @@ public class Player extends Entity {
         currentShield.highlight = true;
         inventory.add(new OBJ_Axe(gp));
         inventory.add(new OBJ_Key(gp));
-        
         inventory.add(new OBJ_Key(gp));
-        
+        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Key(gp));
         inventory.add(new OBJ_Key(gp));
         inventory.add(new OBJ_Lantern(gp));
     }
@@ -298,10 +300,18 @@ public class Player extends Entity {
 
         int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
         contactMonster(monsterIndex);
-        if (getCol() != 84 && getRow() != 66) {
+        // if (getCol() != 84 && (getRow() != 66) {
+        //     gp.eHandler.healActive = true;
+        //     gp.eHandler.healCounter = 0; 
+        // }
+        // if (getCol() != 84 && getRow() != 33) {
+        //     gp.eHandler.healActive = true;
+        //     gp.eHandler.healCounter = 0; 
+        // }
+
+        if (getCol() != 84 && (getRow() != 66 && getRow() != 33)) {
             gp.eHandler.healActive = true;
             gp.eHandler.healCounter = 0;
-            
         }
         gp.eHandler.checkEvent();
 
@@ -333,10 +343,11 @@ public class Player extends Entity {
                 }
                 else /*if (!collisionOn)*/ {
                     switchCases(knockBackDirection, speed, true);
+                    System.out.println("THe player's speed is: " + speed);
     
                 }
                 knockBackCounter++;
-                if (knockBackCounter == 12) {
+                if (knockBackCounter == 8) {
                     knockBackCounter = 0;
                     knockBack = false;
                     speed = defaultSpeed;
@@ -698,6 +709,7 @@ public class Player extends Entity {
         lightUpdated = true;
         speed = defaultSpeed;
         moving = false;
+        gp.obj[0][49] = null;
     }
 
     public void contactMonster(int i) {

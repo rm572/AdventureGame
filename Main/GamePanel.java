@@ -72,11 +72,11 @@ public class GamePanel extends JPanel implements Runnable {
     Entity obj[][] = new Entity[maxMap][50];
     Entity npc[][] = new Entity[maxMap][10];
     InteractiveTile iTile[][] = new InteractiveTile[maxMap][100];
-    HealingTile healTile[][] = new HealingTile[maxMap][100];
-    Entity[][] monster = new Entity[maxMap][100];
+    HealingTile healTile[][] = new HealingTile[maxMap][5];
+    Entity[][] monster = new Entity[maxMap][150];
     ArrayList<Entity> entityList = new ArrayList<>();
     // ArrayList<Entity> projectileList = new ArrayList<>();
-    Entity[][] projectile = new Entity[maxMap][20];
+    Entity[][] projectile = new Entity[maxMap][5];
     ArrayList<Entity> particleList = new ArrayList<>();
     EnvironmentManager eManager = new EnvironmentManager(this);
     EntityGenerator eGenerator = new EntityGenerator(this);
@@ -279,6 +279,7 @@ public class GamePanel extends JPanel implements Runnable {
             boolean monstersGone = true;
             player.update();
             
+
 
             for (int i = 0; i < npc[1].length; i++) {
                 if (npc[currentMap][i] != null) {

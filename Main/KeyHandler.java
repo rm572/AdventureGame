@@ -28,6 +28,7 @@ public class KeyHandler implements KeyListener{
         }
 
         else if (gp.gameState == gp.playState) {
+
             playState(code);
         }
 
@@ -211,7 +212,7 @@ public class KeyHandler implements KeyListener{
                     if (gp.ui.commandNum == 0) {
                         gp.gameState = gp.playState;
                         // gp.stopMusic();
-                        gp.playMusic(0);
+                        // gp.playMusic(0);
 
                         //Goes to character selection screen
                         // gp.ui.titleScreenState = 1;
@@ -222,7 +223,7 @@ public class KeyHandler implements KeyListener{
                         gp.saveLoad.load();
                         gp.gameState = gp.playState;
                         // gp.stopMusic();
-                        gp.playMusic(0);
+                        // gp.playMusic(0);
                     }
     
                     //quit
