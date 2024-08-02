@@ -176,6 +176,10 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldX = 84 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 82 * gp.tileSize;
         i++;
+
+        gp.obj[mapNum][48] = new OBJ_Treasure(gp);
+        gp.obj[mapNum][48].worldX = 83 * gp.tileSize;
+        gp.obj[mapNum][48].worldY = 87 * gp.tileSize;
     }
 
     public void setNPC() {

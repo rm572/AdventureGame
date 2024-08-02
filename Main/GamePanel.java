@@ -46,6 +46,8 @@ public class GamePanel extends JPanel implements Runnable {
     BufferedImage tempScreen;
     Graphics2D g2;
     boolean fullScreenOn = false;
+    
+    boolean gameOver = false;
 
     //
 
@@ -95,6 +97,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int tradeState = 8;
     public final int sleepState = 9;
     public final int mapState = 10;
+    public final int endState = 11;
+    public final int blackScreenState = 12;
 
     public int doorCounter = 11;
 
@@ -116,8 +120,8 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setInteractiveTile();
         aSetter.setHealingTile();
         eManager.setup();
-        // playMusic(0);
-        gameState = titleState;
+        playMusic(0);
+        
  
         //Full screen code
         tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
@@ -125,6 +129,8 @@ public class GamePanel extends JPanel implements Runnable {
         if (fullScreenOn) {
             setFullScreen();
         }
+
+        gameState = titleState;
 
         //
     }
@@ -696,9 +702,4 @@ public class GamePanel extends JPanel implements Runnable {
         sound.stop();
     }
 
-    public void playSE(int i) {
-        //for sound effects
-        se.setFile(i);
-        se.play();
-    }
 }

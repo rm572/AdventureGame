@@ -68,10 +68,10 @@ public class Player extends Entity {
     }
     
     public void setDefaultValues() {
-        // worldX = gp.tileSize * 16;
-        // worldY = gp.tileSize * 90;
-        worldX = gp.tileSize * 75;
-        worldY = gp.tileSize * 84;
+        worldX = gp.tileSize * 16;
+        worldY = gp.tileSize * 90;
+        // worldX = gp.tileSize * 76;
+        // worldY = gp.tileSize * 87;
         // worldX = gp.tileSize * 49;
         // worldY = gp.tileSize * 49;
         defaultSpeed = 8;
@@ -85,8 +85,8 @@ public class Player extends Entity {
         mana = maxMana;
         ammo = 10;
         level = 1;
-        // strength = 1;
-        strength = 50;
+        strength = 1;
+        // strength = 50;
         dexterity = 1;
         exp = 0;
         nextLevelExp = 5;
@@ -120,12 +120,12 @@ public class Player extends Entity {
         currentWeapon.highlight = true;
         inventory.add(currentShield);
         currentShield.highlight = true;
-        inventory.add(new OBJ_Axe(gp));
+        // inventory.add(new OBJ_Axe(gp));
         inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
+        // inventory.add(new OBJ_Key(gp));
+        // inventory.add(new OBJ_Key(gp));
+        // inventory.add(new OBJ_Key(gp));
+        // inventory.add(new OBJ_Key(gp));
         inventory.add(new OBJ_Lantern(gp));
     }
 
@@ -343,7 +343,7 @@ public class Player extends Entity {
                 }
                 else /*if (!collisionOn)*/ {
                     switchCases(knockBackDirection, speed, true);
-                    System.out.println("THe player's speed is: " + speed);
+                    // System.out.println("THe player's speed is: " + speed);
     
                 }
                 knockBackCounter++;
@@ -509,10 +509,10 @@ public class Player extends Entity {
         }
 
         //Lets player die
-        // if (life <= 0) {
-        //     gp.ui.commandNum = -1;
-        //     gp.gameState = gp.gameOverState;
-        // }
+        if (life <= 0) {
+            gp.ui.commandNum = -1;
+            gp.gameState = gp.gameOverState;
+        }
 
 
 
@@ -539,7 +539,7 @@ public class Player extends Entity {
         // }
 
         if (currentLight != null) {
-            System.out.println("Current Light life: " + currentLight.life);
+            // System.out.println("Current Light life: " + currentLight.life);
         
             currentLight.life--;
             if (currentLight.life <= 0) {
@@ -710,6 +710,7 @@ public class Player extends Entity {
         speed = defaultSpeed;
         moving = false;
         gp.obj[0][49] = null;
+        gp.npc[0][1] = null;
     }
 
     public void contactMonster(int i) {
@@ -804,6 +805,7 @@ public class Player extends Entity {
         if (exp >= nextLevelExp) {
             level++;
             nextLevelExp *= 2;
+            
             maxLife += 2;
             life += 1;
             strength++;
@@ -936,6 +938,10 @@ public class Player extends Entity {
                 //     gp.obj[gp.currentMap][i].interact();
                 // }
             }
+
+            // else if (gp.obj[gp.currentMap][i].type == typeTreasure) {
+            //     gp.eHandler.eventMaster.startDialogue(gp.eHandler.eventMaster, 2);
+            // }
 
             else {
                 String text;

@@ -9,11 +9,11 @@ public class MON_Rock_Monster extends Entity{
         name = "Rock Monster";
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxLife = 15;
+        maxLife = 20;
         life = maxLife;
         attack = 5;
-        defense = 4;
-        exp = 20;
+        defense = 10;
+        exp = 15;
 
         solidArea.x = 1;
         solidArea.y = 1;

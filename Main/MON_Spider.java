@@ -9,10 +9,10 @@ public class MON_Spider extends Entity{
         name = "Spider";
         defaultSpeed = 3;
         speed = defaultSpeed;
-        maxLife = 3;
+        maxLife = 10;
         life = maxLife;
         attack = 3;
-        defense = 1;
+        defense = 3;
         exp = 7;
 
         solidArea.x = 1;

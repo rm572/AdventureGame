@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Rectangle;
 
 public class EventHandler {
@@ -13,6 +14,8 @@ public class EventHandler {
     int healCounter = 0;
     boolean healActive = true;
     int tempMap, tempCol, tempRow, prevCol, prevRow;
+    boolean endingCompleted = false;
+    int npcCounter = 0;
 
     public EventHandler(GamePanel gp) {
         this.gp = gp;
@@ -51,6 +54,10 @@ public class EventHandler {
     public void setDialogue() {
         eventMaster.dialogues[0][0] = "You fall into a pit!";
         eventMaster.dialogues[1][0] = "You drink the water.\nYour life and mana have been \nrecovered.\nYour progress has been saved";
+        eventMaster.dialogues[2][0] = "Congratulations! \nYou have successfully found the treasure!";
+        eventMaster.dialogues[2][1] = "Thank you so much for playing my game!\nPlease check out other \nprojects on my GitHub as well!";
+        eventMaster.dialogues[2][2] = "Until next time!";
+        
         // eventMaster.dialogues[2][0] = "You fall into a pit!";
     }
 
@@ -76,7 +83,9 @@ public class EventHandler {
             else if (hit(1, 12, 9, "up")) {speak(gp.npc[1][0]);}
             else if (hit(0, 84, 33, "any")) {healingPool(gp.dialogueState);}
             else if (hit(0, 84, 66, "any")) {healingPool(gp.dialogueState);}    
-            else if (hit(0, 76, 87, "any")) {enterChamber();}
+            // else if (hit(0, 76, 87, "any")) {enterChamber();}
+            else if (gp.player.getRow() == 87 && gp.player.worldX > 76 * gp.tileSize) {enterChamber();}
+            else if (hit(0, 82, 87, "any") && !endingCompleted) {endingDialogue();}
         }
 
         // System.out.println("Heal Counter: " + healCounter);
@@ -150,20 +159,6 @@ public class EventHandler {
     }
 
     public void healingPool(int gameState) {
-
-        // if (gp.keyH.enterPressed == true) {
-        //     gp.gameState = gameState;
-        //     // gp.player.attackCancel = true;
-        //     // gp.ui.currentDialogue = "You drink the water.\nYour life and mana have been \nrecovered.\nYour progress has been saved";
-        //     eventMaster.startDialogue(eventMaster, 1);
-        //     gp.player.life = gp.player.maxLife;
-        //     gp.player.mana = gp.player.maxMana;
-
-        //     gp.aSetter.setMonster();
-
-        //     gp.saveLoad.save();
-        // }
-
         if (healActive) {
             gp.gameState = gameState;
             // gp.player.attackCancel = true;
@@ -223,6 +218,28 @@ public class EventHandler {
         // previousEventX = gp.player.worldX;
         // previousEventY = gp.player.worldY;
         canTouchEvent = false;
+    }
+
+    public void endingDialogue() {
+        // gp.gameState = gp.endState;
+        if (!endingCompleted) {
+
+            gp.gameState = gp.blackScreenState;
+            gp.gameOver = true;
+            endingCompleted = true;
+        }
+        
+
+
+        // gp.setBackground(new Color(0, 0, 0, 200));
+        // gp.gameState = gp.dialogueState;
+        // eventMaster.startDialogue(eventMaster, 2);
+        // gp.saveLoad.save();
+        // gp.obj[0][48] = null;
+    }
+
+    public void collectTreasure() {
+
     }
 
     public void speak(Entity entity) {

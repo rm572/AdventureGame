@@ -50,6 +50,7 @@ public class KeyHandler implements KeyListener{
             gameOverState(code);
         }
         else if (gp.gameState == gp.tradeState) {
+
             tradeState(code);
         }
         else if (gp.gameState == gp.mapState) {
@@ -67,8 +68,7 @@ public class KeyHandler implements KeyListener{
         if (code == KeyEvent.VK_ENTER) {
             enterPressed = true;
         }
-        // gp.stopMusic();
-        // gp.playMusic(1);
+
 
         if (gp.ui.substate == 0) {
             if (code == KeyEvent.VK_W) {
@@ -86,8 +86,6 @@ public class KeyHandler implements KeyListener{
             }
 
             if (code == KeyEvent.VK_ESCAPE) {
-                // gp.stopMusic();
-                // gp.playMusic(0);
                 gp.gameState = gp.playState;
             }
         }
@@ -146,7 +144,7 @@ public class KeyHandler implements KeyListener{
 
         int maxCommandNum = 0;
         switch(gp.ui.substate) {
-            case 0: maxCommandNum = 6; break;
+            case 0: maxCommandNum = 5; break;
             case 3: maxCommandNum = 1; break;
             case 4: maxCommandNum = 1; break;
         }
@@ -168,10 +166,10 @@ public class KeyHandler implements KeyListener{
                     gp.sound.volumeScale--;
                     gp.sound.checkVolume();
                 }
-                if (gp.ui.commandNum == 2 && gp.se.volumeScale > 0) {
-                    gp.se.volumeScale--;
-                    gp.se.checkVolume();
-                }
+                // if (gp.ui.commandNum == 2 && gp.se.volumeScale > 0) {
+                //     gp.se.volumeScale--;
+                //     gp.se.checkVolume();
+                // }
             }
         }
 
@@ -181,10 +179,10 @@ public class KeyHandler implements KeyListener{
                     gp.sound.volumeScale++;
                     gp.sound.checkVolume();
                 }
-                if (gp.ui.commandNum == 2 && gp.sound.volumeScale < 5) {
-                    gp.se.volumeScale++;
-                    gp.se.checkVolume();
-                }
+                // if (gp.ui.commandNum == 2 && gp.sound.volumeScale < 5) {
+                //     gp.se.volumeScale++;
+                //     gp.se.checkVolume();
+                // }
             }
         }
     }
@@ -194,7 +192,6 @@ public class KeyHandler implements KeyListener{
             // if (gp.ui.titleScreenState == 0) {
                 if (code == KeyEvent.VK_S) {
                     gp.ui.commandNum = (gp.ui.commandNum + 1) % 3;
-                    gp.playSE(2);
                 }
     
                 if (code == KeyEvent.VK_W) {
@@ -204,7 +201,6 @@ public class KeyHandler implements KeyListener{
                     else {
                         gp.ui.commandNum--;
                     }
-                    gp.playSE(2);
                 }
     
                 if (code == KeyEvent.VK_ENTER) {

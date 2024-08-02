@@ -37,6 +37,7 @@ public class NPC_Merchant extends Entity{
         dialogues[2][0] = "You need more coins!";
         dialogues[3][0] = "Inventory is full!";
         dialogues[4][0] = "You cannot sell an equipped item!";
+        dialogues[5][0] = "Sorry! That item can't be sold!";
     }
 
     public void setItems() {

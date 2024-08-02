@@ -90,7 +90,10 @@ public class NPC_OldMan extends Entity {
         dialogues[2][1] = "Find the treasure!";
         dialogues[2][2] = "Good luck, lad!";
 
-        // dialogues[3][0] = "Good luck, lad!";
+        dialogues[3][0] = "Congratulations! \nYou have found the treasure!";
+        dialogues[3][1] = "Thank you so much for playing my game!\nPlease check out other projects \non my GitHub as well!";
+        dialogues[3][2] = "Until next time!\n(Feel free replay if you like)";
+        
 
     }
 
@@ -109,12 +112,12 @@ public class NPC_OldMan extends Entity {
         
         dialogueSet++;
 
-        if (dialogues[dialogueSet][0] == null) {
+        if (gp.gameOver) {
+            dialogueSet = 3;
+        }
+        else if (dialogueSet == 3) {
             dialogueSet = 0;
         }
-
-
-        
     }
 
 

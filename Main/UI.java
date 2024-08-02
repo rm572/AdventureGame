@@ -156,6 +156,18 @@ public class UI {
         if (gp.gameState == gp.sleepState) {
             drawSleepScreen();
         }
+
+        if (gp.gameState == gp.endState) {
+            drawEndScreen();
+        }
+
+        if (gp.gameState == gp.blackScreenState) {
+            drawTempBlackScreen();
+        }
+    }
+
+    public void drawEndScreen() {
+
     }
 
     public void drawSleepScreen() {
@@ -358,6 +370,11 @@ public class UI {
                     // currentDialogue = "You cannot sell an equipped item!";
                     npc.startDialogue(npc, 4);
                 }
+                else if (gp.player.inventory.get(itemIndex).name.equals("Treausre")) {
+                    commandNum = 0;
+                    substate = 0;
+                    npc.startDialogue(npc, 5);
+                }
                 else {
                     if (gp.player.inventory.get(itemIndex).amount > 1) {
                         gp.player.inventory.get(itemIndex).amount--;
@@ -370,6 +387,29 @@ public class UI {
             }
         }
 
+    }
+
+    public void drawTempBlackScreen() {
+        counter++;
+        try {
+            g2.setColor(new Color(0, 0, 0, counter*3));
+        }
+        catch (Exception e) {
+            g2.setColor(new Color(0, 0, 0, 255));
+        }
+
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+
+        if (counter == 120) {
+            gp.npc[0][1] = new NPC_OldMan(gp);
+            gp.npc[0][1].worldX = gp.tileSize*76;
+            gp.npc[0][1].worldY = gp.tileSize*87;
+        }
+        if (counter == 200) {
+            counter = 0;
+
+            gp.gameState = gp.playState;
+        }
     }
 
     public void drawTransition() {
@@ -493,7 +533,7 @@ public class UI {
             g2.drawString(">", textX - 25, textY);
             if (gp.keyH.enterPressed) {
                 substate = 0;
-                commandNum = 4;
+                commandNum = 3;
             }
         }
     }
@@ -530,7 +570,7 @@ public class UI {
             g2.drawString(">", textX - 25, textY);
             if (gp.keyH.enterPressed) {
                 substate = 0;
-                commandNum = 5;
+                commandNum = 4;
             }
         }
     }
@@ -589,16 +629,16 @@ public class UI {
 
 
         //SE
-        textY += gp.tileSize;
-        g2.drawString("SE", textX, textY);
-        if (commandNum == 2) {
-            g2.drawString(">", textX - 25, textY);
-        }
+        // textY += gp.tileSize;
+        // g2.drawString("SE", textX, textY);
+        // if (commandNum == 2) {
+        //     g2.drawString(">", textX - 25, textY);
+        // }
 
         //Control
         textY += gp.tileSize;
         g2.drawString("Control", textX, textY);
-        if (commandNum == 3) {
+        if (commandNum == 2) {
             g2.drawString(">", textX - 25, textY);
             if (gp.keyH.enterPressed) {
                 substate = 2;
@@ -609,7 +649,7 @@ public class UI {
         //Save Game
         textY += gp.tileSize;
         g2.drawString("Save Game", textX, textY);
-        if (commandNum == 4) {
+        if (commandNum == 3) {
             g2.drawString(">", textX - 25, textY);
             if (gp.keyH.enterPressed) {
                 substate = 3;
@@ -621,7 +661,7 @@ public class UI {
         //End Game
         textY += gp.tileSize;
         g2.drawString("End Game", textX, textY);
-        if (commandNum == 5) {
+        if (commandNum == 4) {
             g2.drawString(">", textX - 25, textY);
             if (gp.keyH.enterPressed) {
                 substate = 4;
@@ -632,7 +672,7 @@ public class UI {
         //Back
         textY += gp.tileSize*2;
         g2.drawString("Back", textX, textY);
-        if (commandNum == 6) {
+        if (commandNum == 5) {
             g2.drawString(">", textX - 25, textY);
             if (gp.keyH.enterPressed) {
                 gp.gameState = gp.playState;
@@ -680,10 +720,10 @@ public class UI {
         g2.fillRect(textX, textY, volumeWidth, gp.tileSize/2);
 
         //SE Volume
-        textY += gp.tileSize;
-        g2.drawRect(textX, textY, 100, gp.tileSize/2);
-        volumeWidth = 20 * gp.se.volumeScale;
-        g2.fillRect(textX, textY, volumeWidth, gp.tileSize/2);
+        // textY += gp.tileSize;
+        // g2.drawRect(textX, textY, 100, gp.tileSize/2);
+        // volumeWidth = 20 * gp.se.volumeScale;
+        // g2.fillRect(textX, textY, volumeWidth, gp.tileSize/2);
 
         gp.config.saveConfig();
     }
@@ -730,7 +770,7 @@ public class UI {
             g2.drawString(">", textX - 25, textY);
             if (gp.keyH.enterPressed) {
                 substate = 0;
-                commandNum = 3;
+                commandNum = 2;
             }
         }
     }
@@ -950,9 +990,17 @@ public class UI {
         }
         else {
             npc.dialogueIndex = 0;
-            if (gp.gameState == gp.dialogueState) {
+            if (gp.eHandler.endingCompleted) {
+                gp.gameState = gp.titleState;
+                gp.saveLoad.save();
+                gp.npc[0][1] = null;
+                gp.obj[0][49] = null;
+                gp.resetGame(true);
+            }
+            else if (gp.gameState == gp.dialogueState) {
                 gp.gameState = gp.playState;
             }
+
         }
 
         for (String line : currentDialogue.split("\n")) {

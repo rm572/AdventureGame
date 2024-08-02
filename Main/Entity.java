@@ -38,7 +38,7 @@ public class Entity {
     GamePanel gp;
     boolean moving = false;
     boolean ready = true;
-    String dialogues[][] = new String[20][20];
+    String dialogues[][] = new String[10][10];
     int dialogueIndex = 0;
     boolean entityCollision = false;
     boolean attacking = false;
@@ -134,6 +134,7 @@ public class Entity {
     final int typePickupOnly = 7;
     final int typeObstacle = 8;
     final int typeLight = 9;
+    final int typeTreasure = 10;
 
     public Entity(GamePanel gp) {
         this.gp = gp;

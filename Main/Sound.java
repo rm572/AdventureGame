@@ -20,10 +20,6 @@ public class Sound {
     public Sound() {
         soundURL[0] = new File("C:/Users/rober/OneDrive/Programming/AdventureGame/res/Sound/Theme-Song.wav");
         soundURL[1] = new File("C:/Users/rober/OneDrive/Programming/AdventureGame/res/Sound/Trade-Song.wav");
-
-        soundURL[2] = new File("C:/Users/rober/OneDrive/Programming/AdventureGame/res/Sound/SE_1.wav");
-
-
     }
 
     public void setFile(int i) {
